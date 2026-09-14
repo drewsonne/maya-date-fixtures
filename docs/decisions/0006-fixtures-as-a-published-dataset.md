@@ -1,7 +1,8 @@
 # 0006. Test vectors are published as a standalone, citable, language-agnostic dataset
 
-- Status: proposed
+- Status: accepted
 - Date: 2026-09-13
+- Accepted: 2026-09-13
 - Depends on: 0002
 
 ## Context

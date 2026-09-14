@@ -1,7 +1,10 @@
 # 0001. Four layers with inward-only dependencies
 
-- Status: proposed
+- Status: accepted
 - Date: 2026-09-13
+- Accepted: 2026-09-13, amended in the same pass: layer 2 is named
+  `@drewsonne/maya-date-operations` per 0004, not `@drewsonne/maya-calculator`
+  as originally drafted
 
 ## Context
 
@@ -23,7 +26,7 @@ Four layers. Dependencies point inward only; no layer imports from a layer above
 
 **1. Representation — `@drewsonne/maya-dates`.** `LongCount`, `CalendarRound`, `Tzolkin`, `Haab`, `LordOfTheNight`, the correlation constants, `GregorianCalendarDate`, `JulianCalendarDate`, `fromMayanDayNumber`, and the `Wildcard` marker value. Depends only on `moonbeams`.
 
-**2. Operations — `@drewsonne/maya-calculator`.** Addition, subtraction, distance numbers, wildcard *expansion*, `CalendarRoundIterator`, and evaluation of a multi-line document where each line resolves against the one before. Depends on layer 1.
+**2. Operations — `@drewsonne/maya-date-operations`.** Addition, subtraction, distance numbers, wildcard *expansion*, `CalendarRoundIterator`, and evaluation of a multi-line document where each line resolves against the one before. Depends on layer 1.
 
 **3. Parsing — `@drewsonne/maya-calculator-parser`.** Text to AST: the existing layer-0 to layer-3 tokenizer. Depends on layers 1 and 2.
 
@@ -42,4 +45,4 @@ The intended model folded parsing into the GUI. It is kept separate here because
 
 **Harder.** Layer 1 loses exports, so `@drewsonne/maya-dates` takes a major version bump. Layer 2 is a new package that does not exist yet. Three of the four layers need work before the app can consume any of them.
 
-**Now has to be true elsewhere.** The name `maya-calculator` currently belongs to the GUI repository but under this decision names layer 2. The rename is part of 0005 and is not optional — one word for two layers is what allowed the drift. Layer 1's value objects should be immutable; `long-count.ts` and `calendar-round.ts` declare no `readonly` fields today, so the property the layer depends on is unasserted.
+**Now has to be true elsewhere.** Layer 2 takes the name `@drewsonne/maya-date-operations` (0004), so the word "calculator" continues to name only the product a person operates — one word for two layers is what allowed the drift, and the naming split is what prevents it recurring. Layer 1's value objects should be immutable; `long-count.ts` and `calendar-round.ts` declare no `readonly` fields today, so the property the layer depends on is unasserted.

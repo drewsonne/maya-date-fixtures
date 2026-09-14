@@ -1,7 +1,8 @@
 # 0002. The packages stay in separate repositories
 
-- Status: proposed
+- Status: accepted
 - Date: 2026-09-13
+- Accepted: 2026-09-13
 - Supersedes the earlier monorepo draft of this number
 
 ## Context
