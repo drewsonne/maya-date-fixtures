@@ -3,8 +3,9 @@
 Verified, cited test vectors for Maya calendar conversion — Long Count, Calendar Round,
 Maya day number, and western dates — as language-agnostic YAML.
 
-Also the documentation hub for the Maya Dates project (ADR 0007): project-wide decisions,
-research findings, and work plans.
+Project management — issues, decisions, plans, and the project skills — lives in
+[`maya-project`](https://github.com/drewsonne/maya-project) (ADR 0010, superseding
+ADR 0007; this repo held that role until 2026-09-20).
 
 Every value carries its provenance:
 
