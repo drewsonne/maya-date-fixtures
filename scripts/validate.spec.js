@@ -58,6 +58,10 @@ describe('validateRecords', () => {
     expect(validateRecords([fullRecord({ long_count: '9' })])).to.not.be.empty;
   });
 
+  it('rejects an unknown field, so a misspelled field cannot pass silently', () => {
+    expect(validateRecords([fullRecord({ julian_day_numer: 2456283 })])).to.not.be.empty;
+  });
+
   it('errors name the offending record by id', () => {
     const errors = validateRecords([fullRecord({ provenance: 'legendary' })]);
     expect(errors.join('\n')).to.include('era-base');
