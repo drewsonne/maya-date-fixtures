@@ -37,7 +37,7 @@ needed with one package.
 id:           wave-1-schema-ci
 goal:         Every fixture record is schema-validated mechanically, with provenance and citation rules enforced in CI before any vectors exist.
 layer:        0 dataset
-scope:        schema/**, scripts/**, .github/workflows/**, package.json
+scope:        schema/**, scripts/**, .github/workflows/**, package.json, package-lock.json
 contract:     must not create or modify anything under fixtures/ or docs/; the record shape follows the maya-fixtures skill template (id, long_count, calendar_round, lord_of_night, maya_day_number, julian_day_number, gregorian_proleptic, correlation, provenance, source, checked, notes) — fields may be added, none removed or renamed
 criteria:     - `npm run validate` exits 0 on schema/example.yaml
               - `npm run validate` exits nonzero for each of: a record missing `provenance`; a record with `provenance: attested` and an empty or missing `source`; an unknown provenance value; a `long_count` not matching positional notation
@@ -47,6 +47,15 @@ fixtures:     none yet — this package creates the gate; command: npm run valid
 depends_on:   []
 size:         S
 ```
+
+Amendments from the wave-1 review (2026-09-20): the scope gained
+`package-lock.json` — any scope that includes `package.json` includes the
+lockfile, here and in every future plan, because `npm ci` requires it.
+The schema also enforces two provenance rules from the maya-fixtures
+skill: `attested` requires a non-empty `source` (a stated criterion) and
+`derived` requires a non-empty `notes` carrying the derivation (ratified
+at review; not in the original criteria). Records reject unknown fields,
+so adding a field to the record shape is a deliberate schema edit.
 
 ## Wave 2 — the vectors
 
@@ -161,7 +170,7 @@ One package; no intra-wave conflict possible.
 id:           wave-3-js-harness
 goal:         Every fixture runs mechanically against the published @drewsonne/maya-dates, reported by provenance, so an attested failure blocks and an unverified failure informs.
 layer:        0 dataset
-scope:        harness/js/**, package.json (scripts + devDependencies only)
+scope:        harness/js/**, package.json (scripts + devDependencies only), package-lock.json
 contract:     must not modify schema/**, scripts/**, fixtures/**, or any file in any other repository; consumes @drewsonne/maya-dates as published from npm, not from a local path; never edits a fixture to make a test pass (maya-fixtures rule: the sourced value wins)
 criteria:     - `npm run harness` loads every fixtures/*.yaml without per-fixture test code and executes each vector against @drewsonne/maya-dates
               - output reports pass/fail counts grouped by provenance
