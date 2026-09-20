@@ -1,0 +1,15 @@
+# Shape example for fixture records — validated in CI, but NOT a sourced vector.
+# Real vectors live under fixtures/ and every one must cite a real source.
+# The citation below is deliberately fake; copy the shape, not the values.
+- id: era-base
+  long_count: "13.0.0.0.0"
+  calendar_round: "4 Ajaw 8 Kumk'u"
+  lord_of_night: G9
+  maya_day_number: 1872000
+  julian_day_number: 2456283
+  gregorian_proleptic: "2012-12-21"
+  correlation: 584283          # GMT
+  provenance: attested         # attested | derived | unverified
+  source: "Example Author 2012, Example Work, Table 1"
+  checked: "2026-09-13"
+  notes: "Shape example only. A real record cites author, year and page or table of a work actually consulted."

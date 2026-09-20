@@ -1,0 +1,17 @@
+{
+  "name": "@drewsonne/maya-date-fixtures",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Verified, cited test vectors for Maya calendar conversion",
+  "license": "MIT",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "test": "mocha 'scripts/**/*.spec.js'"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "chai": "^4.5.0",
+    "js-yaml": "^4.1.0",
+    "mocha": "^10.7.3"
+  }
+}
