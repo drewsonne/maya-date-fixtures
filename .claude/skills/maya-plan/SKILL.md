@@ -48,10 +48,27 @@ If package B needs a type or function signature that package A introduces, A lan
 
 **Cross-layer imports.** Per ADR 0001, dependencies point inward only: presentation → parsing → operations → representation. A package that would introduce an import from a lower layer to a higher one is rejected, not planned around.
 
+## Hierarchy and horizon (ADR 0009)
+
+Packages are **tasks** in a three-level hierarchy that lives entirely on the
+hub repo: **epic** (label `epic`, type Feature, traces to a PRD outcome) →
+**story** (label `story`, type Feature, sub-issue of its epic, outcome-phrased
+with machine-checkable criteria, never decomposed in its own body) → **task**
+(type Task, sub-issue of its story, the package block verbatim).
+
+Decompose just-in-time: at most the wave in flight **plus one planned wave**
+may hold open task issues. Refuse to decompose further ahead, however much the
+spec would support — regenerating decomposition later is cheap, and a task
+inventory goes stale. A queued wave is re-validated against current `main`
+before dispatch; a stale package is re-planned, not dispatched.
+
+If a package's story or epic does not exist yet, create it first and attach
+the task beneath it. A task without a story is not ready to file.
+
 ## Output
 
 - `docs/plan/<slug>.md` — the waves, packages in full, and the conflict check.
-- One GitHub issue per package, body containing the package block verbatim, labelled `wave-N`, `layer-N` and its size.
+- One GitHub issue per package **on the hub repo**, type Task, created as a sub-issue of its story (ADR 0009), body containing the package block verbatim, labelled `wave-N`, `layer-N` and its size.
 - Added to the project board if `gh auth status` shows the `project` scope; if not, create the issues anyway and say to run `gh auth refresh -s project`.
 
 ## Rules

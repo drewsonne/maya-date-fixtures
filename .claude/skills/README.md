@@ -1,6 +1,12 @@
 # Maya Dates project skills
 
-Six Claude Skills that manage this project: define the product, capture decisions, prove correctness, plan work, and dispatch agents to do it.
+Eight Claude Skills that manage this project: define the product, capture decisions, prove correctness, plan work, dispatch agents to do it, and review the result (`maya-implement` and `maya-review` complete the set below).
+
+Work is tracked per ADR 0009: all issues live on this hub repo as a native
+sub-issue hierarchy — epic (label `epic`) → story (label `story`) → task
+(type Task, a maya-plan package block). Tasks are created just-in-time, at
+most the wave in flight plus one planned ahead; satellite-repo PRs close hub
+tasks with the full cross-repo form (`Closes drewsonne/maya-date-fixtures#N`).
 
 Each is a directory containing a `SKILL.md`. Committing this tree to the repo root is all the installation needed — Claude Code discovers `.claude/skills/*/SKILL.md` automatically when run with this repo as the working directory.
 

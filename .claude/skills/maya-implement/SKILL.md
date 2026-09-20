@@ -47,7 +47,7 @@ This is where the project's value and its risk both sit.
 
 - Conventional prefixes: `feat:`, `fix:`, `test:`, `docs:`, `refactor:`, `chore:`.
 - One logical change per commit. A commit that both moves code and changes behaviour cannot be reviewed or reverted — split it.
-- Reference the package id and issue number in the body.
+- Reference the package id and issue number in the body. Issues live on the hub (ADR 0009): from a satellite repo, close the task with the full cross-repo form `Closes drewsonne/maya-date-fixtures#N` — a bare `Closes #N` there closes nothing.
 - Open a **draft** pull request. Never merge, never push to `main`.
 - The PR description states: the package id, which acceptance criteria are met, which fixtures now pass, and anything you were blocked on. Do not describe the diff — it is visible.
 

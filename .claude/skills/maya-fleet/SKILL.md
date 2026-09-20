@@ -20,6 +20,8 @@ Every check must pass.
 5. `main` is green: the full suite passes on a clean checkout.
 6. The fixture suite exists, covers every behaviour the wave touches, and passes.
 7. Open pull requests on the target repo are either resolved or explicitly deferred with a note in the plan. A stale backlog means every agent branch conflicts.
+8. Every package's task issue is a sub-issue of an open story on the hub (ADR 0009). An orphan task is a planning defect — route it back to `maya-plan`.
+9. If the wave was planned before this session, re-validate each package against current `main` (scope paths still exist, contract still true, fixtures still cover it). A stale package is re-planned, not dispatched.
 
 Report the checks as a pass/fail list. On any failure, name the failed check and the smallest action that clears it, then stop.
 
@@ -40,6 +42,7 @@ Put these in every agent prompt, verbatim:
 - Do not change anything listed in your package's contract.
 - Open a draft pull request. Never merge, never push to main.
 - If your acceptance criteria are ambiguous, stop and report the ambiguity. Do not interpret.
+- Reference your task in the PR description with the full cross-repo form (`Closes drewsonne/maya-date-fixtures#N`). On a satellite repo a bare `Closes #N` closes nothing (ADR 0009).
 
 ## Phase 3 — collect
 

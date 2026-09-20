@@ -30,6 +30,7 @@ Identify the hub repo — the one containing `docs/STATE.md`. Check; do not gues
 ## 4. Pull live work state
 
 - Open issues per repo: `gh issue list --repo drewsonne/<name> --state open --json number,title,labels,updatedAt`
+- Hierarchy, per ADR 0009: epics on the hub (`gh issue list --repo <hub> --label epic`), each with its story/task rollup — report in-flight work grouped by epic where the hierarchy exists.
 - Board, if the scope allows: `gh project list --owner drewsonne`, then `gh project item-list <n> --owner drewsonne --format json`
 - Recent activity: `git log --oneline -10` for a local clone, otherwise `gh api repos/drewsonne/<name>/commits --jq '.[0:10] | .[] | .commit.message'`
 
