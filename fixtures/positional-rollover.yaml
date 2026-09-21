@@ -1,0 +1,202 @@
+# Positional (mixed-radix) rollover vectors for the Long Count.
+# Package: wave-2-positional-rollover (drewsonne/maya-project#2).
+#
+# Positional model attested in Martin and Skidmore 2012 (The PARI Journal 13(2),
+# p. 4, worked example): a Long Count records a "Maya Day Number" of days elapsed
+# since the base 13.0.0.0.0 4 Ajaw 8 Kumk'u, with place values
+#   k'in = 1 day, winal = 20 days, tun = 360 days (18 winals — the winal position
+#   carries at 18), k'atun = 7,200 days, bak'tun = 144,000 days (base-20 carries
+#   everywhere except the winal).
+# Every rollover below is a PAIR of records sharing an id prefix; the two
+# maya_day_number values differ by exactly 1, so each pair is checkable by
+# subtraction. All derived arithmetic is anchored on the era base (maya day
+# number 0, attested with page citations below).
+
+# --- Era base (the anchor; attested) ------------------------------------------
+
+- id: era-base
+  long_count: "13.0.0.0.0"
+  calendar_round: "4 Ajaw 8 Kumk'u"
+  maya_day_number: 0
+  julian_day_number: 584285
+  correlation: 584285
+  provenance: attested
+  source: >-
+    Martin and Skidmore 2012, "Exploring the 584286 Correlation between the
+    Maya and European Calendars", The PARI Journal 13(2), p. 3 ("the Maya base
+    date of 13.0.0.0.0 4 Ajaw 8 Kumk'u is Julian Day Number 584285 in one of
+    the popular correlations") and p. 4 (the Maya Day Number counts days
+    elapsed since 13.0.0.0.0 4 Ajaw 8 Kumk'u, so the base itself is day 0).
+  checked: "2026-09-21"
+  notes: >-
+    The era base of the current count, written with 13 in the bak'tun place.
+    maya_day_number 0 by the definition on p. 4 (days elapsed since this
+    base). julian_day_number 584285 is the base expressed under the 584285
+    correlation constant, exactly as stated on p. 3; under another correlation
+    the JDN differs but the Maya Day Number does not. This record is the
+    attested anchor every derived record in this file counts from.
+
+- id: mdn-place-values-anchor
+  long_count: "11.16.13.16.4"
+  maya_day_number: 1704204
+  provenance: attested
+  source: >-
+    Martin and Skidmore 2012, "Exploring the 584286 Correlation between the
+    Maya and European Calendars", The PARI Journal 13(2), p. 4 (worked
+    breakdown: 11 bak'tuns = 1,584,000 days; 16 k'atuns = 115,200 days;
+    13 tuns = 4,680 days; 16 winals = 320 days; 4 k'ins = 4 days;
+    total 1,704,204 days since 13.0.0.0.0 4 Ajaw 8 Kumk'u).
+  checked: "2026-09-21"
+  notes: >-
+    Attests the place values used by every derived record in this file:
+    bak'tun 144,000 (1,584,000/11), k'atun 7,200 (115,200/16), tun 360
+    (4,680/13), winal 20 (320/16), k'in 1 — i.e. the winal position is
+    base-18 (360/20 = 18) and all other positions are base-20.
+
+# --- Winal rollover: winal position carries at 18, not 20 ---------------------
+
+- id: winal-rollover-pre
+  long_count: "0.0.0.17.19"
+  maya_day_number: 359
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    Anchor: era base 13.0.0.0.0 4 Ajaw 8 Kumk'u = maya day number 0, attested
+    with place values in Martin and Skidmore 2012, The PARI Journal 13(2),
+    pp. 3-4 (see era-base and mdn-place-values-anchor). Positional expansion:
+    0*144000 + 0*7200 + 0*360 + 17*20 + 19*1 = 0 + 0 + 0 + 340 + 19 = 359.
+
+- id: winal-rollover-post
+  long_count: "0.0.1.0.0"
+  maya_day_number: 360
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    0.0.0.17.19 + 1 day, digit by digit: k'in 19+1 = 20 = its base (k'in is
+    base-20), so k'in -> 0, carry 1 to winal; winal 17+1 = 18 = its base (the
+    winal is base-18, NOT 20, since 18 winals = 1 tun), so winal -> 0, carry 1
+    to tun; tun 0+1 = 1, no further carry. Result 0.0.1.0.0. Check by
+    expansion from the era-base anchor (Martin and Skidmore 2012, p. 4 place
+    values): 1*360 = 360 = 359 + 1.
+
+# --- Tun rollover: tun position carries at 20 ---------------------------------
+
+- id: tun-rollover-pre
+  long_count: "0.0.19.17.19"
+  maya_day_number: 7199
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    Anchor: era base = maya day number 0 with place values attested in Martin
+    and Skidmore 2012, The PARI Journal 13(2), pp. 3-4. Expansion:
+    19*360 + 17*20 + 19*1 = 6840 + 340 + 19 = 7199.
+
+- id: tun-rollover-post
+  long_count: "0.1.0.0.0"
+  maya_day_number: 7200
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    0.0.19.17.19 + 1 day, digit by digit: k'in 19+1 = 20 (base 20) -> 0, carry;
+    winal 17+1 = 18 (base 18, the one non-vigesimal position) -> 0, carry;
+    tun 19+1 = 20 (base 20) -> 0, carry; k'atun 0+1 = 1. Result 0.1.0.0.0.
+    Check by expansion from the era-base anchor (Martin and Skidmore 2012,
+    p. 4 place values): 1*7200 = 7200 = 7199 + 1.
+
+# --- K'atun rollover: k'atun position carries at 20 ---------------------------
+
+- id: katun-rollover-pre
+  long_count: "0.19.19.17.19"
+  maya_day_number: 143999
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    Anchor: era base = maya day number 0 with place values attested in Martin
+    and Skidmore 2012, The PARI Journal 13(2), pp. 3-4. Expansion:
+    19*7200 + 19*360 + 17*20 + 19*1 = 136800 + 6840 + 340 + 19 = 143999.
+
+- id: katun-rollover-post
+  long_count: "1.0.0.0.0"
+  maya_day_number: 144000
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    0.19.19.17.19 + 1 day, digit by digit: k'in 19+1 = 20 (base 20) -> 0,
+    carry; winal 17+1 = 18 (base 18) -> 0, carry; tun 19+1 = 20 (base 20)
+    -> 0, carry; k'atun 19+1 = 20 (base 20) -> 0, carry; bak'tun 0+1 = 1.
+    Result 1.0.0.0.0. Check by expansion from the era-base anchor (Martin and
+    Skidmore 2012, p. 4 place values): 1*144000 = 144000 = 143999 + 1.
+
+# --- Bak'tun rollover: lower positions all roll, bak'tun 12 -> 13 -------------
+
+- id: baktun-rollover-pre
+  long_count: "12.19.19.17.19"
+  maya_day_number: 1871999
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    Anchor: era base = maya day number 0 with place values attested in Martin
+    and Skidmore 2012, The PARI Journal 13(2), pp. 3-4. Expansion:
+    12*144000 + 19*7200 + 19*360 + 17*20 + 19*1
+    = 1728000 + 136800 + 6840 + 340 + 19 = 1871999.
+
+- id: baktun-rollover-post
+  long_count: "13.0.0.0.0"
+  maya_day_number: 1872000
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    12.19.19.17.19 + 1 day, digit by digit: k'in 19+1 = 20 (base 20) -> 0,
+    carry; winal 17+1 = 18 (base 18) -> 0, carry; tun 19+1 = 20 (base 20)
+    -> 0, carry; k'atun 19+1 = 20 (base 20) -> 0, carry; bak'tun 12+1 = 13,
+    no further carry. Result 13.0.0.0.0. Check by expansion from the era-base
+    anchor (Martin and Skidmore 2012, p. 4 place values): 13*144000 = 1872000
+    = 1871999 + 1. NOTE: the notation 13.0.0.0.0 is reused by the calendar —
+    the era-base record in this file is the day-zero base also written
+    13.0.0.0.0; this record is the completion of the 13th bak'tun of the
+    current era, 1,872,000 days later (the December 2012 period ending).
+
+# --- Bak'tun-to-piktun rollover: bak'tun position carries at 20 ---------------
+
+- id: baktun-to-piktun-pre
+  long_count: "19.19.19.17.19"
+  maya_day_number: 2879999
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    Anchor: era base = maya day number 0 with place values attested in Martin
+    and Skidmore 2012, The PARI Journal 13(2), pp. 3-4. Expansion:
+    19*144000 + 19*7200 + 19*360 + 17*20 + 19*1
+    = 2736000 + 136800 + 6840 + 340 + 19 = 2879999. Piktun convention as in
+    baktun-to-piktun-post: the bak'tun position runs 13, 14 ... 19 within the
+    current era and carries at 20 (Stuart 2012, see the post record).
+
+- id: baktun-to-piktun-post
+  long_count: "1.0.0.0.0.0"
+  maya_day_number: 2880000
+  provenance: derived
+  source: >-
+    Convention: Stuart, David, 2012, "Bak'tuns and More Bak'tuns", Maya
+    Decipherment (blog), 19 December 2012 — future bak'tuns "represented as
+    14.0.0.0.0, 15.0.0.0.0, and so on. This will run forward still until
+    19.0.0.0.0", after which "the bak'tun changes to 0 and the next higher
+    period, the piktun, turns over as 1", reaching "the end of 1 piktun, or
+    1.0.0.0.0.0" ("1.0.0.0.0.0 October 13, 4772"), per the panel in the
+    Temple of the Inscriptions at Palenque.
+  checked: "2026-09-21"
+  notes: >-
+    PIKTUN CONVENTION USED: the bak'tun position carries at 20 into a sixth
+    position, written 1.0.0.0.0.0 (1 piktun = 20 bak'tuns = 2,880,000 days).
+    This is the convention the Palenque Temple of the Inscriptions panel
+    attests for the future count per Stuart 2012 (cited in source). This file
+    deliberately does NOT use the alternative convention in which the bak'tun
+    place keeps counting without carrying (a five-position 20.0.0.0.0).
+    Arithmetic, digit by digit: 19.19.19.17.19 + 1 day: k'in 19+1 = 20
+    (base 20) -> 0, carry; winal 17+1 = 18 (base 18) -> 0, carry; tun
+    19+1 = 20 (base 20) -> 0, carry; k'atun 19+1 = 20 (base 20) -> 0, carry;
+    bak'tun 19+1 = 20 (base 20 under this convention) -> 0, carry; piktun
+    0+1 = 1. Result 1.0.0.0.0.0. Check by expansion from the era-base anchor
+    (Martin and Skidmore 2012, p. 4 place values): 20*144000 = 2880000
+    = 2879999 + 1. The provenance is derived because the day number comes
+    from this arithmetic; the carry convention itself is cited in source to
+    a work actually consulted.
