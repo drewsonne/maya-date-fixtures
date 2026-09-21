@@ -1,0 +1,236 @@
+# Western conversion pinned under each supported correlation constant.
+# Three triples; within a triple all records share one Long Count (and id prefix)
+# and differ only in the correlation constant. Per the wave-2 red-team advisory
+# (maya-project ADR 0020): every record carries julian_day_number so the
+# constant differences (584285-584283=2, 584286-584285=1, 584286-584283=3) are
+# checkable numerically; no western date below was produced by adding a day
+# offset to a sibling record's gregorian_proleptic - each is either quoted from
+# a source actually opened or re-derived from the JDN with the steps shown.
+#
+# Sources actually opened for this file:
+# - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286 Correlation
+#   between the Maya and European Calendars." The PARI Journal 13(2):3-16.
+#   (mesoweb.com/pari/publications/journal/1302/Correlation.pdf) - "M&S 2012".
+# - Kettunen, Harri, and Christophe Helmke. 2018. Introduction to Maya
+#   Hieroglyphs. Wayeb workshop handbook, EMC 2018.
+#   (wayeb.org/wp-content/uploads/2018/11/Kettunen_Helmke_WH_English_EMC2018.pdf)
+#   Appendix table "Julian Day Numbers (JDN) for January 1st in the Gregorian
+#   calendar (years AD 1-2000)", p. 53 - "K&H 2018". Anchors used from that
+#   table: JDN 1976730 = 1 Jan 700; JDN 2013254 = 1 Jan 800; JDN 2268924 =
+#   1 Jan 1500; JDN 2305448 = 1 Jan 1600; JDN 2451545 = 1 Jan 2000 (all
+#   proleptic Gregorian).
+
+# --- Triple 1: bak'tun-13 end of 2012, Long Count 13.0.0.0.0, MDN 1872000 ---
+# All three western dates in this triple are printed in one sentence of
+# M&S 2012:12 (quoted in each record); each record additionally shows the full
+# JDN arithmetic, so the difference check is numeric, not by construction.
+
+- id: b13-2012-584283
+  long_count: "13.0.0.0.0"
+  maya_day_number: 1872000
+  julian_day_number: 2456283
+  gregorian_proleptic: "2012-12-21"
+  correlation: 584283
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 12 (body text, not a table)"
+  checked: "2026-09-21"
+  notes: >-
+    As printed on p. 12: "the thirteenth Bak'tun will end on December 21, 2012,
+    which is the date in the 584283 correlation, as opposed to December 23 in
+    the 584285 correlation (or Christmas Eve, December 24, according to
+    584286)." Derivation: MDN = 13x144000 = 1872000; JDN = 1872000 + 584283 =
+    2456283. JDN-to-Gregorian check against K&H 2018:53 anchor JDN 2451545 =
+    2000-01-01: 2456283 - 2451545 = 4738 days; 2000-01-01 + 12y (12x365 + leap
+    days 2000, 2004, 2008 = 4383) = 2012-01-01 at JDN 2455928; 4738 - 4383 =
+    355 days after 2012-01-01 = day-of-year 356 of leap year 2012 = 2012-12-21.
+    Julian calendar date: 2012-12-08 (Gregorian = Julian + 13 at this date; see
+    pw-2012-b13-end in proleptic-western.yaml for the Julian-side day count).
+
+- id: b13-2012-584285
+  long_count: "13.0.0.0.0"
+  maya_day_number: 1872000
+  julian_day_number: 2456285
+  gregorian_proleptic: "2012-12-23"
+  correlation: 584285
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 12 (body text, not a table)"
+  checked: "2026-09-21"
+  notes: >-
+    As printed on p. 12: "as opposed to December 23 in the 584285 correlation"
+    (full sentence quoted in b13-2012-584283). Derivation: MDN = 13x144000 =
+    1872000; JDN = 1872000 + 584285 = 2456285. JDN-to-Gregorian check against
+    K&H 2018:53 anchor JDN 2451545 = 2000-01-01: 2456285 - 2451545 = 4740;
+    4740 - 4383 (to 2012-01-01) = 357 days after 2012-01-01 = day-of-year 358
+    of leap year 2012 = 2012-12-23. Julian calendar date: 2012-12-10
+    (Gregorian = Julian + 13 at this date).
+
+- id: b13-2012-584286
+  long_count: "13.0.0.0.0"
+  maya_day_number: 1872000
+  julian_day_number: 2456286
+  gregorian_proleptic: "2012-12-24"
+  correlation: 584286
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 12 (body text, not a table)"
+  checked: "2026-09-21"
+  notes: >-
+    As printed on p. 12: "(or Christmas Eve, December 24, according to 584286)"
+    (full sentence quoted in b13-2012-584283). Derivation: MDN = 13x144000 =
+    1872000; JDN = 1872000 + 584286 = 2456286. JDN-to-Gregorian check against
+    K&H 2018:53 anchor JDN 2451545 = 2000-01-01: 2456286 - 2451545 = 4741;
+    4741 - 4383 (to 2012-01-01) = 358 days after 2012-01-01 = day-of-year 359
+    of leap year 2012 = 2012-12-24. Julian calendar date: 2012-12-11
+    (Gregorian = Julian + 13 at this date).
+
+# --- Triple 2: Poco Uinic Stela 3 eclipse day, Long Count 9.17.19.13.16,
+# MDN 1425516. Attested member: 584286 (the paper's headline claim). The
+# 584283 and 584285 members are derived by JDN arithmetic only. ---
+
+- id: poco-uinic-584286
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  julian_day_number: 2009802
+  gregorian_proleptic: "0790-07-20"
+  correlation: 584286
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), pp. 6-7 and Figure 5 (p. 7)"
+  checked: "2026-09-21"
+  notes: >-
+    Figure 5 caption as printed: "The Poco Uinic eclipse, which occurred on
+    European calendar day July 16, 790 ce and Maya Day 9.17.19.13.16." Body
+    p. 7 as printed: "The Julian Day Number (JDN) assigned to July 16, 790, is
+    2009802. The Maya Day Number (MDN) of the Long Count 9.17.19.13.16 is
+    1425516", followed by the column subtraction "2009802 Julian Day Number /
+    - 1425516 Maya Day Number / 584286". Calendar Round p. 6 as printed:
+    "a Calendar Round of 5 Kib 14 Ch'en that is unambiguously fixed to the
+    Long Count at 9.17.19.13.16". MDN check: 9x144000 + 17x7200 + 19x360 +
+    13x20 + 16 = 1425516. The printed date 16 July 790 is a Julian calendar
+    date (pre-1582 "European calendar"). Only gregorian_proleptic is a
+    re-expression derived here, not printed: from K&H 2018:53 anchor JDN
+    2013254 = 0800-01-01 Gregorian, 2013254 - 2009802 = 3452 days. Check:
+    0790-07-20 to 0800-07-20 = 10x365 + 3 leap days (Feb 29 of 792, 796, 800)
+    = 3653 days; elapsed days 0800-01-01 to 0800-07-20 = day-of-year 202 - 1
+    = 201 (leap year 800); 3653 - 201 = 3452. Hence JDN 2009802 = 0790-07-20
+    proleptic Gregorian; Gregorian = Julian + 4 at this date (July 20 - July
+    16).
+
+- id: poco-uinic-584285
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  julian_day_number: 2009801
+  gregorian_proleptic: "0790-07-19"
+  correlation: 584285
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:7 (JDN 2009802 = 16 July 790 Julian); Kettunen & Helmke 2018:53 (JDN 2013254 = 1 Jan 800 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Derived, not printed in any source consulted. MDN = 9x144000 + 17x7200 +
+    19x360 + 13x20 + 16 = 1425516. JDN = 1425516 + 584285 = 2009801.
+    JDN-to-Julian: attested anchor JDN 2009802 = 0790-07-16 Julian (M&S
+    2012:7); 2009801 = 2009802 - 1, one day earlier within July = 0790-07-15
+    Julian. JDN-to-Gregorian, independently of the Julian side: K&H 2018:53
+    anchor JDN 2013254 = 0800-01-01 Gregorian; 2013254 - 2009801 = 3453;
+    0790-07-19 to 0800-07-19 = 10x365 + 3 leap days (792, 796, 800) = 3653;
+    0800-01-01 to 0800-07-19 elapsed = day-of-year 201 - 1 = 200; 3653 - 200 =
+    3453, so JDN 2009801 = 0790-07-19 proleptic Gregorian. Offset check:
+    Gregorian = Julian + 4 at this date.
+
+- id: poco-uinic-584283
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  julian_day_number: 2009799
+  gregorian_proleptic: "0790-07-17"
+  correlation: 584283
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:7 (JDN 2009802 = 16 July 790 Julian); Kettunen & Helmke 2018:53 (JDN 2013254 = 1 Jan 800 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Derived, not printed in any source consulted. MDN = 9x144000 + 17x7200 +
+    19x360 + 13x20 + 16 = 1425516. JDN = 1425516 + 584283 = 2009799.
+    JDN-to-Julian: attested anchor JDN 2009802 = 0790-07-16 Julian (M&S
+    2012:7); 2009799 = 2009802 - 3, three days earlier within July =
+    0790-07-13 Julian. JDN-to-Gregorian, independently of the Julian side:
+    K&H 2018:53 anchor JDN 2013254 = 0800-01-01 Gregorian; 2013254 - 2009799 =
+    3455; 0790-07-17 to 0800-07-17 = 10x365 + 3 leap days (792, 796, 800) =
+    3653; 0800-01-01 to 0800-07-17 elapsed = day-of-year 199 - 1 = 198;
+    3653 - 198 = 3455, so JDN 2009799 = 0790-07-17 proleptic Gregorian.
+    Offset check: Gregorian = Julian + 4 at this date.
+
+# --- Triple 3: Landa's 1553 Maya New Year (12 K'an 1 Pop), Long Count
+# 11.16.13.16.4, MDN 1704204. Attested members: 584286 (Figure 16) and 584283
+# (Figure 11); the 584285 member is derived by JDN arithmetic. ---
+
+- id: landa-1553-584286
+  long_count: "11.16.13.16.4"
+  calendar_round: "12 K'an 1 Pop"
+  maya_day_number: 1704204
+  julian_day_number: 2288490
+  gregorian_proleptic: "1553-07-28"
+  correlation: 584286
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 14, Figure 16; ten-day Julian-Gregorian offset per footnote 14, p. 12"
+  checked: "2026-09-21"
+  notes: >-
+    Figure 16 (p. 14) as printed: "July 18 (Greenwich) JDN 2288490",
+    "11.16.13.16.4 12 K'an 1 Pop", and the equation "JDN 2288490 - MDN
+    1704204 = 584286"; caption "The Classic system (with the Long Count
+    changing at sunset) extended to July 17, 1553." MDN check: 11x144000 +
+    16x7200 + 13x360 + 16x20 + 4 = 1704204. The printed 18 July 1553 is a
+    Julian (O.S.) date; footnote 14 (p. 12) as printed: "Thompson gives his
+    dates in the Julian calendar's successor, our current Gregorian, which can
+    be adjusted to the Julian by adding ten days (thus the 'Landa date' is
+    July 26 in the Gregorian calendar)" - i.e. by its own example, Gregorian =
+    Julian + 10 in 1553, so 18 July Julian = 28 July Gregorian.
+    gregorian_proleptic independently checked against K&H 2018:53 anchor JDN
+    2268924 = 1500-01-01 Gregorian: 2288490 - 2268924 = 19566; 1500-01-01 +
+    53y = 1553-01-01 after 53x365 + 13 leap days (1504...1552) = 19358 days;
+    19566 - 19358 = 208 days after 1553-01-01 = day-of-year 209 of common year
+    1553 = 1553-07-28.
+
+- id: landa-1553-584285
+  long_count: "11.16.13.16.4"
+  calendar_round: "12 K'an 1 Pop"
+  maya_day_number: 1704204
+  julian_day_number: 2288489
+  gregorian_proleptic: "1553-07-27"
+  correlation: 584285
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:14, Figure 16 (JDN 2288489 = July 17 (Greenwich) 1553, Julian); Kettunen & Helmke 2018:53 (JDN 2268924 = 1 Jan 1500 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Derived: no source consulted prints this pairing under 584285. MDN =
+    11x144000 + 16x7200 + 13x360 + 16x20 + 4 = 1704204. JDN = 1704204 +
+    584285 = 2288489. JDN-to-Julian: Figure 16 (M&S 2012:14) prints "July 17
+    (Greenwich) JDN 2288489", so JDN 2288489 = 1553-07-17 Julian.
+    JDN-to-Gregorian, independently: K&H 2018:53 anchor JDN 2268924 =
+    1500-01-01 Gregorian; 2288489 - 2268924 = 19565; to 1553-01-01 is 19358
+    days (53x365 + 13 leap days 1504...1552); 19565 - 19358 = 207 days after
+    1553-01-01 = day-of-year 208 of common year 1553 = 1553-07-27. Offset
+    check: Gregorian = Julian + 10 at this date (footnote 14, M&S 2012:12).
+
+- id: landa-1553-584283
+  long_count: "11.16.13.16.4"
+  calendar_round: "12 K'an 1 Pop"
+  maya_day_number: 1704204
+  julian_day_number: 2288487
+  gregorian_proleptic: "1553-07-25"
+  correlation: 584283
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 12, Figure 11; ten-day Julian-Gregorian offset per footnote 14, p. 12"
+  checked: "2026-09-21"
+  notes: >-
+    Figure 11 (p. 12) as printed: "11.16.13.16.4 12 K'an 1 Pop (15 July 1553)",
+    caption "The effect of leap years (in 1544, 1548, and 1552) on New Year's
+    Day (1 Pop) in the Colonial-era Maya calendar. The European calendar dates
+    are per the 584283 correlation." The printed 15 July 1553 is Julian
+    (O.S.); Gregorian = Julian + 10 in 1553 (footnote 14, p. 12), so 25 July
+    1553 Gregorian. Derivation: MDN = 11x144000 + 16x7200 + 13x360 + 16x20 +
+    4 = 1704204; JDN = 1704204 + 584283 = 2288487; JDN-to-Julian via the
+    Figure 16 anchor JDN 2288489 = 1553-07-17 Julian: 2288487 = 2288489 - 2 =
+    1553-07-15 Julian, agreeing with Figure 11 as printed. JDN-to-Gregorian,
+    independently: K&H 2018:53 anchor JDN 2268924 = 1500-01-01 Gregorian;
+    2288487 - 2268924 = 19563; 19563 - 19358 (to 1553-01-01) = 205 days after
+    1553-01-01 = day-of-year 206 of common year 1553 = 1553-07-25.

@@ -1,0 +1,125 @@
+# Julian Day Number <-> western calendar vectors, with the proleptic Gregorian
+# treated as the normal case. Each record asserts the two western readings of
+# one and the same day separately: julian_day_number and gregorian_proleptic
+# are typed fields; the Julian CALENDAR date and the Julian-Gregorian day
+# offset applicable at that date are stated in notes (per the wave-2 red-team
+# advisory, maya-project ADR 0020), so both conversions can be recomputed from
+# the JDN alone. Vectors sit on both sides of the 1582-10-04 (Julian) /
+# 1582-10-15 (Gregorian) transition; the straddling pair shares the id prefix
+# pw-reform- and each of the pair states both calendars' dates for both days.
+#
+# Sources actually opened for this file:
+# - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286 Correlation
+#   between the Maya and European Calendars." The PARI Journal 13(2):3-16.
+#   (mesoweb.com/pari/publications/journal/1302/Correlation.pdf) - "M&S 2012".
+# - Kettunen, Harri, and Christophe Helmke. 2018. Introduction to Maya
+#   Hieroglyphs. Wayeb workshop handbook, EMC 2018.
+#   (wayeb.org/wp-content/uploads/2018/11/Kettunen_Helmke_WH_English_EMC2018.pdf)
+#   Appendix table "Julian Day Numbers (JDN) for January 1st in the Gregorian
+#   calendar (years AD 1-2000)", p. 53 - "K&H 2018".
+
+- id: pw-0790-eclipse-day
+  julian_day_number: 2009802
+  gregorian_proleptic: "0790-07-20"
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:7, Figure 5 (JDN 2009802 = 16 July 790, Julian); Kettunen & Helmke 2018:53 (JDN 2013254 = 1 Jan 800 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Julian calendar date: 0790-07-16 (the Poco Uinic eclipse day). Attested
+    Julian side, M&S 2012:7 as printed: "The Julian Day Number (JDN) assigned
+    to July 16, 790, is 2009802" (a pre-reform "European calendar" date, i.e.
+    Julian). Gregorian side derived: K&H 2018:53 anchor JDN 2013254 =
+    0800-01-01 Gregorian; 2013254 - 2009802 = 3452 days; 0790-07-20 to
+    0800-07-20 = 10x365 + 3 leap days (792, 796, 800) = 3653 days; elapsed
+    0800-01-01 to 0800-07-20 = day-of-year 202 - 1 = 201 (leap year 800);
+    3653 - 201 = 3452, so JDN 2009802 = 0790-07-20 proleptic Gregorian.
+    Julian-Gregorian offset applicable at this date: Gregorian = Julian + 4
+    days (07-20 vs 07-16).
+
+- id: pw-1553-landa-newyear
+  julian_day_number: 2288490
+  gregorian_proleptic: "1553-07-28"
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:14, Figure 16 (July 18 (Greenwich) JDN 2288490, Julian) and 2012:12, footnote 14 (ten-day offset); Kettunen & Helmke 2018:53 (JDN 2268924 = 1 Jan 1500 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Julian calendar date: 1553-07-18 (Maya New Year 12 K'an 1 Pop in the
+    584286 correlation). Attested Julian side, M&S 2012:14, Figure 16 as
+    printed: "July 18 (Greenwich) JDN 2288490" - an O.S. (Julian) date.
+    Offset attested by M&S 2012:12, footnote 14 as printed: dates "can be
+    adjusted to the Julian by adding ten days (thus the 'Landa date' is July
+    26 in the Gregorian calendar)", whose example fixes the direction:
+    Gregorian = Julian + 10 in 1553. Gregorian side derived independently:
+    K&H 2018:53 anchor JDN 2268924 = 1500-01-01 Gregorian; 2288490 - 2268924
+    = 19566 days; 1500-01-01 to 1553-01-01 = 53x365 + 13 leap days
+    (1504...1552) = 19358; 19566 - 19358 = 208 days after 1553-01-01 =
+    day-of-year 209 of common year 1553 = 1553-07-28. Julian-Gregorian offset
+    applicable at this date: Gregorian = Julian + 10 days.
+
+- id: pw-reform-a-julian-last
+  julian_day_number: 2299160
+  gregorian_proleptic: "1582-10-14"
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:14, Figure 16 (July 17 (Greenwich) JDN 2288489, Julian); Kettunen & Helmke 2018:53 (JDN 2305448 = 1 Jan 1600 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Julian calendar date: 1582-10-04, the last day before the Gregorian
+    reform. This day (JDN 2299160) = 1582-10-04 Julian = 1582-10-14 proleptic
+    Gregorian; the next day (JDN 2299161) = 1582-10-15 Gregorian = 1582-10-05
+    proleptic Julian, the first day of the reformed calendar. Julian side
+    derived from the attested anchor JDN 2288489 = 1553-07-17 Julian (M&S
+    2012:14, Figure 16): 1553-07-17 to 1582-07-17 Julian = 29x365 + 7 leap
+    days (1556, 1560, 1564, 1568, 1572, 1576, 1580) = 10592 days; 1582-07-17
+    to 1582-10-04 = 14 (rest of July) + 31 (Aug) + 30 (Sep) + 4 = 79 days;
+    2288489 + 10592 + 79 = 2299160 = 1582-10-04 Julian. Gregorian side
+    derived independently: K&H 2018:53 anchor JDN 2305448 = 1600-01-01
+    Gregorian; 2305448 - 2299160 = 6288 days; 1582-10-14 to 1599-10-14 =
+    17x365 + 4 leap days (1584, 1588, 1592, 1596) = 6209; 1599-10-14 to
+    1600-01-01 = 17 (rest of Oct) + 30 (Nov) + 31 (Dec) + 1 = 79; 6209 + 79 =
+    6288, so JDN 2299160 = 1582-10-14 proleptic Gregorian. Julian-Gregorian
+    offset applicable at this date: Gregorian = Julian + 10 days.
+
+- id: pw-reform-b-gregorian-first
+  julian_day_number: 2299161
+  gregorian_proleptic: "1582-10-15"
+  provenance: derived
+  source: "Anchors: Martin & Skidmore 2012:14, Figure 16 (July 17 (Greenwich) JDN 2288489, Julian); Kettunen & Helmke 2018:53 (JDN 2305448 = 1 Jan 1600 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Julian calendar date: 1582-10-05 (proleptic Julian - civil use had
+    switched). This day (JDN 2299161) = 1582-10-15 Gregorian, the first day
+    of the reformed calendar, = 1582-10-05 proleptic Julian; the previous day
+    (JDN 2299160) = 1582-10-04 Julian = 1582-10-14 proleptic Gregorian.
+    Gregorian side derived: K&H 2018:53 anchor JDN 2305448 = 1600-01-01
+    Gregorian; 2305448 - 2299161 = 6287 days; 1582-10-15 to 1599-10-15 =
+    17x365 + 4 leap days (1584, 1588, 1592, 1596) = 6209; 1599-10-15 to
+    1600-01-01 = 16 (rest of Oct) + 30 (Nov) + 31 (Dec) + 1 = 78; 6209 + 78 =
+    6287, so JDN 2299161 = 1582-10-15 Gregorian. Julian side derived from the
+    attested anchor JDN 2288489 = 1553-07-17 Julian (M&S 2012:14, Figure 16):
+    2299161 - 2288489 = 10672 = 10592 (29 Julian years to 1582-07-17, 7 leap
+    days) + 80 (1582-07-17 to 1582-10-05: 14 + 31 + 30 + 5), so JDN 2299161 =
+    1582-10-05 proleptic Julian. Julian-Gregorian offset applicable at this
+    date: Gregorian = Julian + 10 days.
+
+- id: pw-2012-b13-end
+  julian_day_number: 2456283
+  gregorian_proleptic: "2012-12-21"
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 12 (body text); Gregorian day count checked against Kettunen & Helmke 2018:53 (JDN 2451545 = 1 Jan 2000 Gregorian)"
+  checked: "2026-09-21"
+  notes: >-
+    Julian calendar date: 2012-12-08. Gregorian side attested, M&S 2012:12 as
+    printed: "the thirteenth Bak'tun will end on December 21, 2012, which is
+    the date in the 584283 correlation"; JDN = MDN 1872000 (= 13x144000) +
+    584283 = 2456283. Gregorian day-count check: K&H 2018:53 anchor JDN
+    2451545 = 2000-01-01 Gregorian; 2456283 - 2451545 = 4738 days; 2000-01-01
+    to 2012-01-01 = 12x365 + 3 leap days (2000, 2004, 2008) = 4383; 4738 -
+    4383 = 355 days after 2012-01-01 = day-of-year 356 of leap year 2012 =
+    2012-12-21. Julian side derived: proleptic Julian anchor JDN 2299161 =
+    1582-10-05 Julian (see pw-reform-b-gregorian-first); 2456283 - 2299161 =
+    157122 days; 1582-10-05 to 2012-10-05 Julian = 430x365 + 108 leap days
+    (1584...2012, every fourth year, no century rule in the Julian calendar)
+    = 157058; 2012-10-05 to 2012-12-08 = 26 (rest of Oct) + 30 (Nov) + 8 =
+    64; 157058 + 64 = 157122, so JDN 2456283 = 2012-12-08 proleptic Julian.
+    Julian-Gregorian offset applicable at this date: Gregorian = Julian + 13
+    days.
