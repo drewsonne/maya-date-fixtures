@@ -1,0 +1,218 @@
+# Distance-number (DN) arithmetic vectors: forward and backward across winal,
+# tun, k'atun and bak'tun rollovers, plus a chained (two-DN) vector.
+#
+# Conventions used in this file:
+# - Each record's long_count / calendar_round / maya_day_number describe the
+#   RESULT of applying the distance number; the DN expression, direction and
+#   anchor are encoded in the id and spelled out in notes.
+# - DN digits are written in Long Count order bak'tun.k'atun.tun.winal.k'in
+#   (shorter DNs omit leading positions), e.g. DN 1.6 = 1 winal, 6 k'in = 26 days.
+# - maya_day_number (MDN) = bak'tun*144000 + k'atun*7200 + tun*360 + winal*20 + k'in,
+#   the same "Maya day number" convention as Kettunen & Helmke 2020, Appendix p. 52.
+# - Rollover carries: k'in and tun and k'atun columns carry at 20; the winal
+#   column carries at 18. Borrows likewise: 18 borrowed into the winal column,
+#   20 into every other column.
+# - Calendar Round orthography follows each cited source as published
+#   (Kettunen & Helmke: new orthography; Lounsbury 1976: old orthography,
+#   e.g. Zac = Sak, Kayab = K'ayab, Ahau = Ajaw).
+#
+# Sources actually consulted for this file:
+# - Kettunen, Harri & Christophe Helmke 2020, Introduction to Maya Hieroglyphs,
+#   Wayeb, Appendix p. 52, table "An Example of the Correlation of the Long
+#   Count, Tzolk'in, Haab, and the Lords of the Night" (day-by-day table
+#   9.8.19.17.14 .. 9.9.0.1.4) and p. 52 Maya-day-number worked example
+#   (9.15.6.14.6 = 1406446). https://www.mesoweb.com/resources/handbook/IMH2020.pdf
+# - Lounsbury, Floyd G. 1976, "A Rationale for the Initial Date of the Temple
+#   of the Cross at Palenque", in The Art, Iconography and Dynastic History of
+#   Palenque, Part III (Proceedings of the Segunda Mesa Redonda de Palenque),
+#   ed. Merle Greene Robertson, pp. 211-224, at p. 220 and p. 220 n. 18.
+#   https://www.mesoweb.org/pari/publications/RT03/Rationale.pdf
+
+# --- winal rollover (k'in column wraps at 20) ---
+
+- id: "dn-winal-fwd_anchor-9.9.0.0.16_plus-6"
+  long_count: "9.9.0.1.2"
+  calendar_round: "12 Ik' 5 Sek"
+  lord_of_night: G4
+  maya_day_number: 1360822
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Wayeb, Appendix p. 52, correlation table (both endpoint rows: 9.9.0.0.16 = 6 Kib 19 Sotz' G7; 9.9.0.1.2 = 12 Ik' 5 Sek G4)"
+  checked: "2026-09-21"
+  notes: |
+    Direction: forward across the winal rollover (k'in column wraps at 20).
+    Anchor: 9.9.0.0.16 (6 Kib 19 Sotz', G7), anchor MDN = 9*144000 + 9*7200 + 0*360 + 0*20 + 16 = 1296000 + 64800 + 16 = 1360816.
+    DN: 6 (6 k'in) = 6 days.
+    Column-wise addition with carries: k'in 16 + 6 = 22 -> write 2, carry 1 winal; winal 0 + 0 + 1 = 1; tun 0; k'atun 9; bak'tun 9 => 9.9.0.1.2.
+    Reconciliation: result MDN = anchor MDN + DN days = 1360816 + 6 = 1360822 = 9*144000 + 9*7200 + 0*360 + 1*20 + 2.
+    The DN vector itself is this file's construction (hence derived); both endpoint Long Counts, Calendar Rounds and Lords of the Night are read from the cited published table, which lists every day from 9.8.19.17.14 to 9.9.0.1.4.
+
+- id: "dn-winal-bwd_anchor-9.9.0.1.4_minus-8"
+  long_count: "9.9.0.0.16"
+  calendar_round: "6 Kib 19 Sotz'"
+  lord_of_night: G7
+  maya_day_number: 1360816
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Wayeb, Appendix p. 52, correlation table (both endpoint rows: 9.9.0.1.4 = 1 K'an 7 Sek G6; 9.9.0.0.16 = 6 Kib 19 Sotz' G7)"
+  checked: "2026-09-21"
+  notes: |
+    Direction: backward across the winal rollover.
+    Anchor: 9.9.0.1.4 (1 K'an 7 Sek, G6), anchor MDN = 9*144000 + 9*7200 + 0*360 + 1*20 + 4 = 1360824.
+    DN: 8 (8 k'in) = 8 days, subtracted.
+    Column-wise subtraction with borrows: k'in 4 - 8 < 0, borrow 20 from the winal column: 4 + 20 - 8 = 16; winal 1 - 1 (borrow) = 0; tun 0; k'atun 9; bak'tun 9 => 9.9.0.0.16.
+    Reconciliation: result MDN = anchor MDN - DN days = 1360824 - 8 = 1360816 = 9*144000 + 9*7200 + 0*360 + 0*20 + 16.
+    Uses a different anchor (9.9.0.1.4) and a different DN than the forward winal vector, so the pair is not an algebraic inverse. Endpoint LC/CR/G values are read from the cited published table.
+
+# --- tun rollover (winal column wraps at 18) ---
+
+- id: "dn-tun-fwd_anchor-9.9.0.1.4_plus-17.0"
+  long_count: "9.9.1.0.4"
+  maya_day_number: 1361164
+  provenance: derived
+  source: "Anchor row from Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Wayeb, Appendix p. 52, correlation table (9.9.0.1.4 = 1 K'an 7 Sek G6); result is hand-derived below"
+  checked: "2026-09-21"
+  notes: |
+    Direction: forward across the tun rollover (winal column wraps at 18, base-18).
+    Anchor: 9.9.0.1.4 (1 K'an 7 Sek, G6 per the cited table), anchor MDN = 9*144000 + 9*7200 + 0*360 + 1*20 + 4 = 1360824.
+    DN: 17.0 (17 winal, 0 k'in) = 17*20 = 340 days.
+    Column-wise addition with carries: k'in 4 + 0 = 4; winal 1 + 17 = 18 -> write 0, carry 1 tun (winal is base-18); tun 0 + 0 + 1 = 1; k'atun 9; bak'tun 9 => 9.9.1.0.4.
+    Reconciliation: result MDN = anchor MDN + DN days = 1360824 + 340 = 1361164 = 9*144000 + 9*7200 + 1*360 + 0*20 + 4.
+    The result date lies beyond the end of the cited table, so no Calendar Round is asserted for it; the Long Count and MDN follow entirely from the hand arithmetic shown.
+
+- id: "dn-tun-bwd_anchor-9.13.2.9.0_minus-10.0"
+  long_count: "9.13.1.17.0"
+  maya_day_number: 1390300
+  provenance: derived
+  source: "Anchor date from Lounsbury 1976, A Rationale for the Initial Date of the Temple of the Cross at Palenque, Segunda Mesa Redonda de Palenque Part III, p. 220 (Palenque Temple XVIII jambs, event at A19-C5 on 9.13.2.9.0, 11 Ahau 18 Yax); result is hand-derived below"
+  checked: "2026-09-21"
+  notes: |
+    Direction: backward across the tun rollover (borrow 18 into the winal column).
+    Anchor: 9.13.2.9.0 (11 Ahau 18 Yax, an event in the life of the Temple XVIII ruler, published at Lounsbury 1976:220), anchor MDN = 9*144000 + 13*7200 + 2*360 + 9*20 + 0 = 1296000 + 93600 + 720 + 180 = 1390500.
+    DN: 10.0 (10 winal, 0 k'in) = 10*20 = 200 days, subtracted.
+    Column-wise subtraction with borrows: k'in 0 - 0 = 0; winal 9 - 10 < 0, borrow 18 from the tun column (winal is base-18): 9 + 18 - 10 = 17; tun 2 - 1 (borrow) = 1; k'atun 13; bak'tun 9 => 9.13.1.17.0.
+    Reconciliation: result MDN = anchor MDN - DN days = 1390500 - 200 = 1390300 = 9*144000 + 13*7200 + 1*360 + 17*20 + 0.
+    Different anchor and DN than the forward tun vector, so not an algebraic inverse pair. No Calendar Round asserted for the result (not published in the source consulted).
+
+# --- k'atun rollover (tun column wraps at 20) ---
+
+- id: "dn-katun-fwd_anchor-9.8.19.17.14_plus-1.6"
+  long_count: "9.9.0.1.0"
+  calendar_round: "10 Ajaw 3 Sek"
+  lord_of_night: G2
+  maya_day_number: 1360820
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Wayeb, Appendix p. 52, correlation table (both endpoint rows: 9.8.19.17.14 = 10 Ix 17 Sip G3; 9.9.0.1.0 = 10 Ajaw 3 Sek G2)"
+  checked: "2026-09-21"
+  notes: |
+    Direction: forward across the k'atun rollover (the carry cascades k'in -> winal -> tun -> k'atun, crossing the k'atun ending 9.9.0.0.0 3 Ajaw 3 Sotz').
+    Anchor: 9.8.19.17.14 (10 Ix 17 Sip, G3), anchor MDN = 9*144000 + 8*7200 + 19*360 + 17*20 + 14 = 1296000 + 57600 + 6840 + 340 + 14 = 1360794.
+    DN: 1.6 (1 winal, 6 k'in) = 1*20 + 6 = 26 days.
+    Column-wise addition with carries: k'in 14 + 6 = 20 -> write 0, carry 1 winal; winal 17 + 1 + 1 = 19 -> exceeds 17, write 19 - 18 = 1, carry 1 tun (winal is base-18); tun 19 + 0 + 1 = 20 -> write 0, carry 1 k'atun; k'atun 8 + 0 + 1 = 9; bak'tun 9 => 9.9.0.1.0.
+    Reconciliation: result MDN = anchor MDN + DN days = 1360794 + 26 = 1360820 = 9*144000 + 9*7200 + 0*360 + 1*20 + 0.
+    Both endpoint LC/CR/G values are read from the cited published table; the DN vector construction and arithmetic are this file's (hence derived).
+
+- id: "dn-katun-bwd_anchor-9.9.0.1.3_minus-1.7"
+  long_count: "9.8.19.17.16"
+  calendar_round: "12 Kib 19 Sip"
+  lord_of_night: G5
+  maya_day_number: 1360796
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Wayeb, Appendix p. 52, correlation table (both endpoint rows: 9.9.0.1.3 = 13 Ak'bal 6 Sek G5; 9.8.19.17.16 = 12 Kib 19 Sip G5)"
+  checked: "2026-09-21"
+  notes: |
+    Direction: backward across the k'atun rollover (the borrow cascades k'in <- winal <- tun <- k'atun, crossing back over 9.9.0.0.0).
+    Anchor: 9.9.0.1.3 (13 Ak'bal 6 Sek, G5), anchor MDN = 9*144000 + 9*7200 + 0*360 + 1*20 + 3 = 1360823.
+    DN: 1.7 (1 winal, 7 k'in) = 1*20 + 7 = 27 days, subtracted.
+    Column-wise subtraction with borrows: k'in 3 - 7 < 0, borrow 20 from winal: 3 + 20 - 7 = 16; winal 1 - 1 (borrow) - 1 = -1 < 0, borrow 18 from tun (winal is base-18): 1 - 1 - 1 + 18 = 17; tun 0 - 1 (borrow) < 0, borrow 20 from k'atun: 0 - 1 + 20 = 19; k'atun 9 - 1 (borrow) = 8; bak'tun 9 => 9.8.19.17.16.
+    Reconciliation: result MDN = anchor MDN - DN days = 1360823 - 27 = 1360796 = 9*144000 + 8*7200 + 19*360 + 17*20 + 16.
+    Uses a different anchor (9.9.0.1.3) and a different DN than the forward k'atun vector, so the pair is not an algebraic inverse. Endpoint LC/CR/G values are read from the cited published table.
+
+# --- bak'tun rollover (k'atun column wraps at 20) ---
+
+- id: "dn-baktun-fwd_anchor-9.19.19.17.19_plus-1"
+  long_count: "10.0.0.0.0"
+  maya_day_number: 1440000
+  provenance: derived
+  checked: "2026-09-21"
+  notes: |
+    Direction: forward across the bak'tun rollover; a single-day DN whose carry cascades through every column.
+    Anchor: 9.19.19.17.19, the last day of bak'tun 9, anchor MDN = 9*144000 + 19*7200 + 19*360 + 17*20 + 19 = 1296000 + 136800 + 6840 + 340 + 19 = 1439999.
+    DN: 1 (1 k'in) = 1 day.
+    Column-wise addition with carries: k'in 19 + 1 = 20 -> write 0, carry 1 winal; winal 17 + 1 = 18 -> write 0, carry 1 tun (winal is base-18); tun 19 + 1 = 20 -> write 0, carry 1 k'atun; k'atun 19 + 1 = 20 -> write 0, carry 1 bak'tun; bak'tun 9 + 1 = 10 => 10.0.0.0.0.
+    Reconciliation: result MDN = anchor MDN + DN days = 1439999 + 1 = 1440000 = 10*144000.
+    Fully hand-derived positional arithmetic; no Calendar Round is asserted because no published source was consulted for these endpoints.
+
+- id: "dn-baktun-bwd_anchor-10.0.0.1.2_minus-1.3"
+  long_count: "9.19.19.17.19"
+  maya_day_number: 1439999
+  provenance: derived
+  checked: "2026-09-21"
+  notes: |
+    Direction: backward across the bak'tun rollover; the borrow cascades through every column.
+    Anchor: 10.0.0.1.2, anchor MDN = 10*144000 + 0 + 0 + 1*20 + 2 = 1440022.
+    DN: 1.3 (1 winal, 3 k'in) = 1*20 + 3 = 23 days, subtracted.
+    Column-wise subtraction with borrows: k'in 2 - 3 < 0, borrow 20 from winal: 2 + 20 - 3 = 19; winal 1 - 1 (borrow) - 1 = -1 < 0, borrow 18 from tun (winal is base-18): 1 - 1 - 1 + 18 = 17; tun 0 - 1 (borrow) < 0, borrow 20 from k'atun: 0 - 1 + 20 = 19; k'atun 0 - 1 (borrow) < 0, borrow 20 from bak'tun: 0 - 1 + 20 = 19; bak'tun 10 - 1 (borrow) = 9 => 9.19.19.17.19.
+    Reconciliation: result MDN = anchor MDN - DN days = 1440022 - 23 = 1439999 = 9*144000 + 19*7200 + 19*360 + 17*20 + 19.
+    Uses a different anchor (10.0.0.1.2) and a different DN than the forward bak'tun vector, so the pair is not an algebraic inverse. Fully hand-derived; no Calendar Round asserted.
+
+# --- published-inscription DN vectors (Palenque Temple XVIII, Lounsbury 1976:220) ---
+
+- id: "dn-palenque-t18-fwd_anchor-9.12.6.5.8_plus-2.3.16.14"
+  long_count: "9.14.10.4.2"
+  calendar_round: "9 Ik 5 Kayab"
+  maya_day_number: 1400482
+  provenance: attested
+  source: "Lounsbury, Floyd G. 1976, A Rationale for the Initial Date of the Temple of the Cross at Palenque, in The Art, Iconography and Dynastic History of Palenque, Part III (Segunda Mesa Redonda de Palenque), ed. M. G. Robertson, pp. 211-224, at p. 220 (Palenque Temple XVIII jambs, passages A3-A15 and D5-D7)"
+  checked: "2026-09-21"
+  notes: |
+    Published inscription DN, forward. Palenque Temple XVIII jambs: the ruler's birth is recorded as the Initial Series 9.12.6.5.8, 3 Lamat 6 Zac (passage A3-A15), and his accession (D5-D7) is stated to be a DN of 2.3.16.14 after his birth, fixing the accession at 9.14.10.4.2, 9 Ik 5 Kayab. Anchor LC, DN and target LC/CR are all as published at Lounsbury 1976:220 (old orthography retained as published; Zac = Sak, Kayab = K'ayab).
+    Anchor: 9.12.6.5.8 (3 Lamat 6 Zac), anchor MDN = 9*144000 + 12*7200 + 6*360 + 5*20 + 8 = 1296000 + 86400 + 2160 + 100 + 8 = 1384668.
+    DN: 2.3.16.14 (2 k'atun, 3 tun, 16 winal, 14 k'in) = 2*7200 + 3*360 + 16*20 + 14 = 14400 + 1080 + 320 + 14 = 15814 days.
+    Column-wise addition with carries: k'in 8 + 14 = 22 -> write 2, carry 1 winal; winal 5 + 16 + 1 = 22 -> write 22 - 18 = 4, carry 1 tun (winal is base-18); tun 6 + 3 + 1 = 10; k'atun 12 + 2 = 14; bak'tun 9 => 9.14.10.4.2, crossing both the winal and the tun rollover.
+    Reconciliation: result MDN = anchor MDN + DN days = 1384668 + 15814 = 1400482 = 9*144000 + 14*7200 + 10*360 + 4*20 + 2.
+
+- id: "dn-palenque-t18-bwd_anchor-9.14.10.4.2_minus-7.14.9.12.0"
+  long_count: "2.0.0.10.2"
+  calendar_round: "9 Ik 0 Zac"
+  maya_day_number: 288202
+  provenance: attested
+  source: "Lounsbury, Floyd G. 1976, A Rationale for the Initial Date of the Temple of the Cross at Palenque, in The Art, Iconography and Dynastic History of Palenque, Part III (Segunda Mesa Redonda de Palenque), ed. M. G. Robertson, pp. 211-224, at p. 220 and p. 221 (Palenque Temple XVIII jambs, passage C8-C13; DN day total 1,112,280 stated in the source's factorization)"
+  checked: "2026-09-21"
+  notes: |
+    Published inscription DN, backward. Palenque Temple XVIII (C8-C13) characterizes the ruler's accession as 7.14.9.12.0 after the 'accession' of the mythological lady of the Tablet of the Cross, on a day 9 Ik 0 Zac; Lounsbury states that this DN, subtracted from the accession date 9.14.10.4.2, fixes that day at 2.0.0.10.2, and gives the DN's day total 7.14.9.12.0 = 1,112,280 (p. 221). Anchor LC/CR, DN, target LC/CR and the DN day count are all as published (old orthography retained; Zac = Sak).
+    Anchor: 9.14.10.4.2 (9 Ik 5 Kayab), anchor MDN = 9*144000 + 14*7200 + 10*360 + 4*20 + 2 = 1400482.
+    DN: 7.14.9.12.0 (7 bak'tun, 14 k'atun, 9 tun, 12 winal, 0 k'in) = 7*144000 + 14*7200 + 9*360 + 12*20 + 0 = 1008000 + 100800 + 3240 + 240 = 1112280 days, subtracted (matches the published total 1,112,280).
+    Column-wise subtraction with borrows: k'in 2 - 0 = 2; winal 4 - 12 < 0, borrow 18 from tun (winal is base-18): 4 + 18 - 12 = 10; tun 10 - 1 (borrow) - 9 = 0; k'atun 14 - 14 = 0; bak'tun 9 - 7 = 2 => 2.0.0.10.2. The interval reaches back across the bak'tun endings 9.0.0.0.0 through 3.0.0.0.0.
+    Reconciliation: result MDN = anchor MDN - DN days = 1400482 - 1112280 = 288202 = 2*144000 + 0*7200 + 0*360 + 10*20 + 2.
+
+- id: "dn-tc-heir-bwd_anchor-9.10.10.0.0_minus-1.8.17"
+  long_count: "9.10.8.9.3"
+  calendar_round: "9 Akbal 6 Xul"
+  maya_day_number: 1371063
+  provenance: derived
+  source: "Anchor, DN and target Calendar Round from Lounsbury 1976, A Rationale for the Initial Date of the Temple of the Cross at Palenque, Segunda Mesa Redonda de Palenque Part III, p. 220 n. 18 (Tablet of the Cross, passage K7-K10: 1.8.17 from 9 Akbal 6 Xul to the lahuntun ending 13 Ahau 18 Kankin, 9.10.10.0.0); target Long Count hand-derived below"
+  checked: "2026-09-21"
+  notes: |
+    Published inscription DN, backward, anchored on a period ending. Tablet of the Cross (Palenque), K7-K10: it was 1.8.17 from the day 9 Akbal 6 Xul (heir-designation of Chan-Bahlum) to the lahuntun ending 13 Ahau 18 Kankin, 9.10.10.0.0 (Lounsbury 1976:220 n. 18, old orthography as published). Counting backward from the period ending recovers the event's Long Count, which the source does not print; the target LC here is therefore hand-derived (record marked derived), while anchor LC/CR, DN and target CR are as published.
+    Anchor: 9.10.10.0.0 (13 Ahau 18 Kankin), anchor MDN = 9*144000 + 10*7200 + 10*360 + 0 + 0 = 1296000 + 72000 + 3600 = 1371600.
+    DN: 1.8.17 (1 tun, 8 winal, 17 k'in) = 360 + 160 + 17 = 537 days, subtracted.
+    Column-wise subtraction with borrows: k'in 0 - 17 < 0, borrow 20 from winal: 0 + 20 - 17 = 3; winal 0 - 1 (borrow) - 8 = -9 < 0, borrow 18 from tun (winal is base-18): -9 + 18 = 9; tun 10 - 1 (borrow) - 1 = 8; k'atun 10; bak'tun 9 => 9.10.8.9.3, crossing back over the winal and tun rollovers.
+    Reconciliation: result MDN = anchor MDN - DN days = 1371600 - 537 = 1371063 = 9*144000 + 10*7200 + 8*360 + 9*20 + 3.
+    Consistency check of the published target CR against the derived LC (era base 13.0.0.0.0 = 4 Ajaw 8 Kumk'u): tzolk'in coefficient (4 + 1371063) mod 13 = 9; tzolk'in day (19 + 1371063) mod 20 = index 2 = Akbal; haab (348 + 1371063) mod 365 = 106 = 6 Xul. Matches the published 9 Akbal 6 Xul.
+
+# --- chained vector (anchor + two successive DNs) ---
+
+- id: "dn-chain-palenque-t18_anchor-9.12.6.5.8_plus-2.3.16.14_minus-7.14.9.12.0"
+  long_count: "2.0.0.10.2"
+  calendar_round: "9 Ik 0 Zac"
+  maya_day_number: 288202
+  provenance: attested
+  source: "Lounsbury, Floyd G. 1976, A Rationale for the Initial Date of the Temple of the Cross at Palenque, in The Art, Iconography and Dynastic History of Palenque, Part III (Segunda Mesa Redonda de Palenque), ed. M. G. Robertson, pp. 211-224, at pp. 220-221 (Palenque Temple XVIII jambs, passages A3-A15, D5-D7 and C8-C13)"
+  checked: "2026-09-21"
+  notes: |
+    Chained vector: one anchor, two successive published DNs; anchor, both DNs, the intermediate date and the final date are all as published in the Temple XVIII inscription per Lounsbury 1976:220-221 (old orthography retained as published).
+    Anchor: 9.12.6.5.8 (3 Lamat 6 Zac, the ruler's birth Initial Series), anchor MDN = 9*144000 + 12*7200 + 6*360 + 5*20 + 8 = 1384668.
+    Link 1 (forward): DN 2.3.16.14 = 2*7200 + 3*360 + 16*20 + 14 = 15814 days. Column-wise: k'in 8 + 14 = 22 -> 2 carry 1; winal 5 + 16 + 1 = 22 -> 22 - 18 = 4 carry 1 (base-18); tun 6 + 3 + 1 = 10; k'atun 12 + 2 = 14; bak'tun 9. This link crosses the winal and tun rollovers.
+    INTERMEDIATE RESULT (asserted): 9.14.10.4.2 (9 Ik 5 Kayab, the ruler's accession), MDN = 1384668 + 15814 = 1400482 = 9*144000 + 14*7200 + 10*360 + 4*20 + 2.
+    Link 2 (backward): DN 7.14.9.12.0 = 1112280 days (day total as published), subtracted. Column-wise: k'in 2 - 0 = 2; winal 4 - 12 < 0, borrow 18 from tun: 4 + 18 - 12 = 10; tun 10 - 1 - 9 = 0; k'atun 14 - 14 = 0; bak'tun 9 - 7 = 2. This link reaches back across seven bak'tun endings.
+    FINAL RESULT (this record): 2.0.0.10.2 (9 Ik 0 Zac, 'accession' of the mythological lady of the Tablet of the Cross), MDN = 1400482 - 1112280 = 288202 = 2*144000 + 10*20 + 2.
+    Reconciliation: 1384668 + 15814 - 1112280 = 288202.
