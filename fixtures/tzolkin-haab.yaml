@@ -1,0 +1,221 @@
+# Tzolk'in / Haab cycle-length and Wayeb vectors.
+# Package: wave-2-cycles-and-seating.
+#
+# Sources actually consulted (opened and read for this file):
+#   - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286 Correlation
+#     between the Maya and European Calendars." The PARI Journal 13(2):3-16.
+#     (mesoweb.com/pari/publications/journal/1302/Correlation.pdf)
+#   - Kettunen, Harri, and Christophe Helmke. 2019. Introduction to Maya
+#     Hieroglyphs. Sixteenth revised edition. Wayeb.
+#     (wayeb.org/wp-content/uploads/2019/04/wh2019english.pdf)
+#
+# Conventions used throughout this file (stated per record as required):
+#   - Haab coefficients run 0-19; the first day of a month is its "seating",
+#     written numerically as 0 (Kettunen & Helmke 2019:49, exemplified with
+#     "0 Sotz'" and "0 Sek" in the table on their p. 52).
+#   - Wayeb has 5 days; its coefficients run 0-4 ("below the usual range"),
+#     with 0 = the seated Wayeb day, following the same 0-based convention.
+#   - Winal is base-18 relative to the tun; all other Long Count positions
+#     are base-20 (Kettunen & Helmke 2019:47, Table V).
+
+# --- Era base (anchor for the Wayeb derivations below) -----------------------
+
+- id: era-base-4-ajaw-8-kumku
+  long_count: "13.0.0.0.0"
+  calendar_round: "4 Ajaw 8 Kumk'u"
+  maya_day_number: 0
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 4"
+  checked: "2026-09-21"
+  notes: >-
+    Martin & Skidmore 2012:4 define the Maya Day Number as days elapsed
+    "since 13.0.0.0.0 4 Ajaw 8 Kumk'u", making this the MDN 0 base.
+    Haab coefficient convention in this record: 0-19 with seating = 0
+    (Kettunen & Helmke 2019:49); 8 Kumk'u is year-day 348 counting the
+    seating of Pop as day 0 (Kumk'u is the 18th month, month order per
+    Kettunen & Helmke 2019:58-59, Tables XII-XIII).
+
+# --- 260-day cycle length (pair: shared id prefix cr260-, delta = 260) -------
+
+- id: cr260-anchor-poco-uinic
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  julian_day_number: 2009802
+  correlation: 584286
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), pp. 6-7 (Poco Uinic Stela 3)"
+  checked: "2026-09-21"
+  notes: >-
+    Poco Uinic Stela 3: Calendar Round 5 Kib 14 Ch'en "unambiguously fixed
+    to the Long Count at 9.17.19.13.16" (p. 6); MDN 1425516, eclipse day
+    JDN 2009802 (July 16, 790 CE Julian), and the subtraction
+    2009802 - 1425516 = 584286 all stated on p. 7. Correlation field records
+    the 584286 constant as given there. Haab coefficient convention: 0-19
+    with seating = 0 (Kettunen & Helmke 2019:49).
+
+- id: cr260-plus-one-cycle
+  long_count: "9.18.0.8.16"
+  calendar_round: "5 Kib 9 Sotz'"
+  maya_day_number: 1425776
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:6-7 anchor; cycle structure per Kettunen & Helmke 2019:49"
+  checked: "2026-09-21"
+  notes: >-
+    Hand derivation, one full tzolk'in after cr260-anchor-poco-uinic.
+    MDN: 1425516 + 260 = 1425776. Long Count: 1425776 - 9x144000 (1296000)
+    = 129776; 129776 - 18x7200 (129600) = 176; 176 < 360 so tun = 0;
+    176 = 8x20 + 16, giving 9.18.0.8.16. Tzolk'in: 260 mod 13 = 0 and
+    260 mod 20 = 0, so both coefficient and day name repeat: 5 Kib —
+    this pair demonstrates the 260-day cycle length (tzolk'in is 13
+    numbers x 20 named days = 260 days, Kettunen & Helmke 2019:49).
+    Haab: 14 Ch'en is year-day 8x20+14 = 174 (Ch'en is the 9th month);
+    (174 + 260) mod 365 = 69; day 69 falls in Sotz' (month 4, days 60-79),
+    69 - 60 = 9, hence 9 Sotz'. Cross-check: Kib takes haab coefficients
+    4/9/14/19 (Kettunen & Helmke 2019:51), and 9 is in that set.
+    Coefficient convention: 0-19 with seating = 0.
+
+# --- 365-day cycle length (pair: shared id prefix haab365-, delta = 365) -----
+
+- id: haab365-anchor-thompson-1553
+  long_count: "11.16.13.16.4"
+  calendar_round: "12 K'an 2 Pop"
+  maya_day_number: 1704204
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), p. 4"
+  checked: "2026-09-21"
+  notes: >-
+    Martin & Skidmore 2012:4 give the Long Count 11.16.13.16.4 for the
+    Classic-convention Calendar Round 12 K'an 2 Pop and tabulate its MDN
+    as 1,704,204 (11 bak'tuns 1,584,000 + 16 k'atuns 115,200 + 13 tuns
+    4,680 + 16 winals 320 + 4 k'ins 4; the printed table's "115,000" for
+    16 k'atuns is an evident misprint since the stated total 1,704,204
+    requires 16x7200 = 115,200). Landa recorded this same day as
+    12 K'an 1 Pop in the Colonial-era count (Martin & Skidmore 2012:4);
+    see fixtures/haab-seating.yaml for that convention divergence.
+    Haab coefficient convention here: Classic 0-19 with seating = 0.
+
+- id: haab365-plus-one-cycle
+  long_count: "11.16.14.16.9"
+  calendar_round: "13 Muluk 2 Pop"
+  maya_day_number: 1704569
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 anchor; cycle structure per Kettunen & Helmke 2019:49"
+  checked: "2026-09-21"
+  notes: >-
+    Hand derivation, one full haab after haab365-anchor-thompson-1553.
+    MDN: 1704204 + 365 = 1704569. Long Count: 1704569 - 11x144000
+    (1584000) = 120569; 120569 - 16x7200 (115200) = 5369; 5369 - 14x360
+    (5040) = 329; 329 = 16x20 + 9, giving 11.16.14.16.9. Haab: 365 mod
+    365 = 0, so the haab position repeats: 2 Pop — this pair demonstrates
+    the 365-day cycle length (haab is 18 months x 20 days + 5 Wayeb days
+    = 365, Kettunen & Helmke 2019:49). Tzolk'in: 365 mod 13 = 1, so
+    12 + 1 = 13; 365 mod 20 = 5, so the day name advances five places
+    from K'an to Muluk (day order per Kettunen & Helmke 2019:56-57,
+    Tables X-XI), hence 13 Muluk. Cross-check: Muluk takes haab
+    coefficients 7/12/17/2 (Kettunen & Helmke 2019:51), and 2 is in
+    that set. Coefficient convention: 0-19 with seating = 0.
+
+# --- Wayeb vectors: all five Wayeb days plus both boundaries -----------------
+# All derived by counting forward from the attested era base
+# 13.0.0.0.0 4 Ajaw 8 Kumk'u (MDN 0, year-day 348; Martin & Skidmore 2012:4).
+# Wayeb structure (5 days at the end of the year, after Kumk'u):
+# Kettunen & Helmke 2019:49 (5 added days) and 58-59 (month order, Wayeb last).
+# Long Count omitted on these records: days 11-17 after the era base sit at
+# the 13.0.0.0.0 rollover, where bak'tun-13 vs bak'tun-0 notation varies by
+# author; the maya_day_number pins each day unambiguously.
+
+- id: wayeb-entry-last-kumku
+  calendar_round: "2 Chuwen 19 Kumk'u"
+  maya_day_number: 11
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Boundary vector: the last Kumk'u day, immediately before Wayeb entry.
+    MDN 11 = era base + 11. Tzolk'in: (4 + 11) mod 13 = 2; day name
+    Ajaw + 11 places = Chuwen. Haab: (348 + 11) = 359 = 19 Kumk'u, the
+    20th and final Kumk'u day under the 0-19 coefficient convention.
+    Cross-check: Chuwen takes haab coefficients 4/9/14/19 (Kettunen &
+    Helmke 2019:51); 19 is in that set. Coefficient convention: 0-19,
+    seating = 0 (Kettunen & Helmke 2019:49).
+
+- id: wayeb-day-0
+  calendar_round: "3 Eb 0 Wayeb"
+  maya_day_number: 12
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    First (seated) Wayeb day. MDN 12; tzolk'in (4 + 12) mod 13 = 3,
+    Ajaw + 12 = Eb; haab year-day (348 + 12) = 360 = 0 Wayeb. Coefficient
+    convention: Wayeb days written 0-4, 0 = seated Wayeb, following the
+    0-based seating convention of Kettunen & Helmke 2019:49 (not a 1-5
+    or "seated + 1-4" scheme). Wayeb coefficients stay below the usual
+    0-19 range because Wayeb has only 5 days (Kettunen & Helmke 2019:49).
+    Cross-check: Eb takes haab coefficients 5/10/15/0 (Kettunen & Helmke
+    2019:51); 0 is in that set.
+
+- id: wayeb-day-1
+  calendar_round: "4 Ben 1 Wayeb"
+  maya_day_number: 13
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Second Wayeb day. MDN 13; tzolk'in (4 + 13) mod 13 = 4, Ajaw + 13 =
+    Ben; haab year-day 361 = 1 Wayeb. Coefficient convention: 0-4,
+    0 = seated (Kettunen & Helmke 2019:49). Cross-check: Ben takes haab
+    coefficients 6/11/16/1 (Kettunen & Helmke 2019:51); 1 is in that set.
+
+- id: wayeb-day-2
+  calendar_round: "5 Ix 2 Wayeb"
+  maya_day_number: 14
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Third Wayeb day. MDN 14; tzolk'in (4 + 14) mod 13 = 5, Ajaw + 14 =
+    Ix; haab year-day 362 = 2 Wayeb. Coefficient convention: 0-4,
+    0 = seated (Kettunen & Helmke 2019:49). Cross-check: Ix takes haab
+    coefficients 7/12/17/2 (Kettunen & Helmke 2019:51); 2 is in that set.
+
+- id: wayeb-day-3
+  calendar_round: "6 Men 3 Wayeb"
+  maya_day_number: 15
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Fourth Wayeb day. MDN 15; tzolk'in (4 + 15) mod 13 = 6, Ajaw + 15 =
+    Men; haab year-day 363 = 3 Wayeb. Coefficient convention: 0-4,
+    0 = seated (Kettunen & Helmke 2019:49). Cross-check: Men takes haab
+    coefficients 8/13/18/3 (Kettunen & Helmke 2019:51); 3 is in that set.
+
+- id: wayeb-day-4
+  calendar_round: "7 Kib 4 Wayeb"
+  maya_day_number: 16
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Fifth and last Wayeb day. MDN 16; tzolk'in (4 + 16) mod 13 = 7,
+    Ajaw + 16 = Kib; haab year-day 364 = 4 Wayeb, the final day of the
+    365-day year. Coefficient convention: 0-4, 0 = seated (Kettunen &
+    Helmke 2019:49). Cross-check: Kib takes haab coefficients 4/9/14/19
+    (Kettunen & Helmke 2019:51); 4 is in that set.
+
+- id: wayeb-exit-seating-of-pop
+  calendar_round: "8 Kaban 0 Pop"
+  maya_day_number: 17
+  provenance: derived
+  source: "Derived from Martin & Skidmore 2012:4 era base; cycle structure per Kettunen & Helmke 2019:49, 51, 56-59"
+  checked: "2026-09-21"
+  notes: >-
+    Boundary vector: exit from Wayeb into the new year, the seating of
+    Pop. MDN 17; tzolk'in (4 + 17) mod 13 = 8, Ajaw + 17 = Kaban; haab
+    year-day (348 + 17) mod 365 = 0 = 0 Pop, i.e. the seating of Pop —
+    "the beginning of the month was called the 'seating' of the month"
+    (Kettunen & Helmke 2019:49). Coefficient convention: 0-19, seating
+    = 0. Cross-check: Kaban takes haab coefficients 5/10/15/0 (Kettunen
+    & Helmke 2019:51); 0 is in that set.
