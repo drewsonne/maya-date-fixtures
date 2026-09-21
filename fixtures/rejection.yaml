@@ -1,0 +1,253 @@
+# Rejection fixtures: each record pins one input that a conforming implementation
+# MUST reject, together with the specific error condition it must raise.
+#
+# Conventions in this file:
+# - The rejected input is always quoted verbatim in notes and hinted in id.
+#   Inputs the record schema itself would reject (malformed positional strings)
+#   appear ONLY in notes/id, never in typed fields. Inputs the record schema
+#   accepts (a negative integer, a pattern-valid but out-of-range long_count,
+#   any calendar_round string) also appear in the typed field so a harness can
+#   consume them directly.
+# - No error taxonomy exists yet in the library or the app. Every error name
+#   below is therefore marked "intended": it is a proposed name, listed in the
+#   introducing pull request as a decision for review, not an existing
+#   identifier. What is pinned is the error CONDITION (the violated rule and
+#   its bound); the name may be renamed when a taxonomy is decided.
+# - Bounds are cited to the calendar-structure source actually consulted
+#   (Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, Seventeenth
+#   Revised Edition, Wayeb) or to this repository's fixture schema/ADRs.
+
+# --- Negative Maya Day Numbers ------------------------------------------------
+
+- id: rej-mdn-negative-one
+  maya_day_number: -1
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 47"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): maya_day_number -1.
+    Required error (intended name, proposed for review): ERR_NEGATIVE_MAYA_DAY_NUMBER.
+    Violated rule and bound: maya_day_number >= 0.
+    Derivation of the bound: the Long Count "records linear time from a
+    (mythological) zero point ... onwards" (Kettunen & Helmke 2020, Appendix E,
+    p. 47). The maya day number counts whole days elapsed since the era base,
+    which is day 0; the smallest representable value is therefore 0, and
+    -1 < 0 violates the bound. ADR 0005 (maya-project docs/decisions/0005)
+    records rejection of negative Maya Day Numbers as the library's intended
+    strict behaviour. Boundary case: -1 is the value adjacent to the bound.
+
+- id: rej-mdn-negative-era-span
+  maya_day_number: -1872000
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 47"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): maya_day_number -1872000.
+    Required error (intended name, proposed for review): ERR_NEGATIVE_MAYA_DAY_NUMBER.
+    Violated rule and bound: maya_day_number >= 0 (same bound as
+    rej-mdn-negative-one; see that record's derivation). This case pins a
+    large-magnitude negative (13.0.0.0.0 = 13 x 144000 = 1872000 days, negated)
+    so the rejection cannot be satisfied by a check that only catches -1 or
+    small negatives.
+
+# --- Malformed positional strings --------------------------------------------
+# These inputs fail the dotted positional notation itself, so they cannot be
+# placed in the long_count typed field (the record schema pattern
+# ^[0-9]+(\.[0-9]+)+$ would reject the record). They appear only here in notes.
+
+- id: rej-lc-malformed-nonnumeric
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "9.16.4.10.x".
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: a Long Count string is dot-separated non-negative
+    decimal digits only, pattern ^[0-9]+(\.[0-9]+)+$ per
+    schema/fixture.schema.json in this repository.
+    Derivation: the final position "x" contains the character 'x', which is not
+    in [0-9], so the string fails the pattern before any range check applies.
+
+- id: rej-lc-malformed-empty-position
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "13..0.0.0".
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: pattern ^[0-9]+(\.[0-9]+)+$ per
+    schema/fixture.schema.json (this repository); every dot must be followed by
+    at least one digit.
+    Derivation: between the first and second dot there are zero digits (an
+    empty position), so the string fails the pattern.
+
+- id: rej-lc-malformed-comma-separator
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "9,16,4,10,8".
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: positions are separated by '.', pattern
+    ^[0-9]+(\.[0-9]+)+$ per schema/fixture.schema.json (this repository).
+    Derivation: the string contains ',' which is neither a digit nor '.', and
+    contains no '.' at all, so it fails the pattern on both counts.
+
+- id: rej-lc-malformed-trailing-dot
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "9.16.4.10.8.".
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: pattern ^[0-9]+(\.[0-9]+)+$ per
+    schema/fixture.schema.json (this repository); the string must end in a
+    digit.
+    Derivation: the trailing '.' is not followed by a digit, so the string
+    fails the pattern.
+
+- id: rej-lc-malformed-negative-digit
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "9.16.4.-1.8".
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: pattern ^[0-9]+(\.[0-9]+)+$ per
+    schema/fixture.schema.json (this repository); positions are non-negative
+    digit runs, so '-' cannot appear.
+    Derivation: the fourth position "-1" contains '-', which is not in [0-9],
+    so the string fails the pattern at the character level (this is a
+    malformation, distinct from a numerically out-of-range position).
+
+- id: rej-lc-malformed-empty-string
+  provenance: derived
+  source: "schema/fixture.schema.json (this repository), long_count pattern"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count string "" (the empty string).
+    Required error (intended name, proposed for review): ERR_MALFORMED_LONG_COUNT.
+    Violated rule and bound: pattern ^[0-9]+(\.[0-9]+)+$ per
+    schema/fixture.schema.json (this repository); at least two dot-separated
+    digit runs are required.
+    Derivation: the empty string contains no digits and no dots, so it fails
+    the pattern.
+
+# --- Out-of-range coefficients ------------------------------------------------
+# One record per position class with a distinct range: k'in (base-20), winal
+# (base-18), tun (base-20, one order higher), tzolk'in coefficient (1..13,
+# both bounds), haab day coefficient (0..19), Wayeb day coefficient (0..4).
+# These long_count strings are pattern-valid (digits and dots), so they appear
+# in the typed field as well as verbatim in notes.
+
+- id: rej-lc-kin-20
+  long_count: "9.16.4.10.20"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 48, Table VI"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count "9.16.4.10.20".
+    Required error (intended name, proposed for review): ERR_KIN_OUT_OF_RANGE.
+    Violated rule and bound: k'in position in [0,19]; got 20.
+    Bound source: Table VI, "Classic Maya numerals from zero to nineteen"
+    (Kettunen & Helmke 2020, p. 48) — a positional digit runs 0..19; twenty
+    days shift to the next (winal) position (p. 47, Table V).
+
+- id: rej-lc-winal-18
+  long_count: "9.16.4.18.8"
+  provenance: derived
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 47, Table V"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count "9.16.4.18.8".
+    Required error (intended name, proposed for review): ERR_WINAL_OUT_OF_RANGE.
+    Violated rule and bound: winal position in [0,17]; got 18.
+    Derivation of the bound: Table V (Kettunen & Helmke 2020, p. 47) gives the
+    third Long Count position the value 18 x 20 = 360 days — the winal position
+    breaks the vigesimal rule and carries at 18, not 20. So the largest winal
+    digit is 17 (17 winal + 19 k'in = 359 days, one less than 1 tun), and 18 is
+    out of range. Strict-mode counterpart of lenient-input.yaml
+    len-winal-overflow.
+
+- id: rej-lc-tun-20
+  long_count: "9.16.20.10.8"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, pp. 47-48, Tables V and VI"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): long_count "9.16.20.10.8".
+    Required error (intended name, proposed for review): ERR_TUN_OUT_OF_RANGE.
+    Violated rule and bound: tun position in [0,19]; got 20.
+    Bound source: positional digits run 0..19 (Table VI, p. 48); the position
+    above the tun is worth 20 x 360 days (Table V, p. 47), so twenty tuns shift
+    to the k'atun position. Distinct from the winal class: the tun is an
+    ordinary base-20 position. Strict-mode counterpart of lenient-input.yaml
+    len-tun-overflow.
+
+- id: rej-cr-tzolkin-coeff-14
+  calendar_round: "14 Ajaw 8 Kumk'u"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49, Table VII"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): calendar_round "14 Ajaw 8 Kumk'u"
+    (tzolk'in part "14 Ajaw").
+    Required error (intended name, proposed for review):
+    ERR_TZOLKIN_COEFF_OUT_OF_RANGE.
+    Violated rule and bound: tzolk'in coefficient in [1,13]; got 14 (above the
+    upper bound).
+    Bound source: "The Tzolk'in is a cycle of 260 days, made up of the
+    permutation of 13 numbers with twenty named days" (Kettunen & Helmke 2020,
+    p. 49); Table VII shows the coefficients cycling over 1..13 only.
+
+- id: rej-cr-tzolkin-coeff-0
+  calendar_round: "0 Ajaw 8 Kumk'u"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49, Table VII"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): calendar_round "0 Ajaw 8 Kumk'u"
+    (tzolk'in part "0 Ajaw").
+    Required error (intended name, proposed for review):
+    ERR_TZOLKIN_COEFF_OUT_OF_RANGE.
+    Violated rule and bound: tzolk'in coefficient in [1,13]; got 0 (below the
+    lower bound — distinct from the upper-bound case rej-cr-tzolkin-coeff-14).
+    Bound source: the tzolk'in coefficients are a permutation of 13 numbers
+    beginning at 1 ("The first day of the Tzolk'in is '1 Imix'"), Kettunen &
+    Helmke 2020, p. 49 and Table VII; 0 never occurs as a tzolk'in coefficient.
+
+- id: rej-cr-haab-coeff-20
+  calendar_round: "4 Ajaw 20 Kumk'u"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): calendar_round "4 Ajaw 20 Kumk'u"
+    (haab part "20 Kumk'u").
+    Required error (intended name, proposed for review):
+    ERR_HAAB_COEFF_OUT_OF_RANGE.
+    Violated rule and bound: haab day coefficient in [0,19] for the eighteen
+    20-day months; got 20.
+    Bound source: "In the Haab calendar each 'month' stays in place for twenty
+    days ... The beginning of the month was called the 'seating' of the month,
+    and after 19 days Pop is completed and the next month (Wo) is 'seated'"
+    (Kettunen & Helmke 2020, p. 49) — i.e. in modern numeric notation a month's
+    day coefficients run seating (0) through 19; day 20 of a month does not
+    exist, the next month is seated instead.
+
+- id: rej-cr-wayeb-coeff-5
+  calendar_round: "4 Ajaw 5 Wayeb"
+  provenance: attested
+  source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49"
+  checked: "2026-09-21"
+  notes: |
+    Rejected input (verbatim): calendar_round "4 Ajaw 5 Wayeb"
+    (haab part "5 Wayeb").
+    Required error (intended name, proposed for review):
+    ERR_WAYEB_COEFF_OUT_OF_RANGE.
+    Violated rule and bound: Wayeb day coefficient in [0,4]; got 5. Distinct
+    from the ordinary haab month bound [0,19]: Wayeb is the short month.
+    Bound source: the haab is "made up of 18 named 'months' of 20 days each,
+    with 5 extra days added on at the end of the year" (Kettunen & Helmke 2020,
+    p. 49) — the five Wayeb days are seating (0) through 4 in modern numeric
+    notation, so 5 is out of range.
