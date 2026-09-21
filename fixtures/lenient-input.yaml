@@ -1,0 +1,127 @@
+# Lenient-input fixtures: each record pins the INTENDED normalisation of one
+# out-of-range Long Count input, so the app/library leniency divergence is
+# pinned as intended behaviour rather than discovered later.
+#
+# Status of this file — read before consuming:
+# - Every record here is provenance: unverified and GATED OUT of the trust
+#   gate. The normalisation ARITHMETIC in each record is hand-derived and shown
+#   in full (standard positional carry: k'in carries at 20, winal at 18, every
+#   higher position at 20). But whether out-of-range input is ACCEPTED at all —
+#   the acceptance policy — is a design decision with no published source and,
+#   as of 2026-09-21, no recorded project decision: ADR 0005 (maya-project
+#   docs/decisions/0005) leaves it as an open question to be settled by the
+#   wave-4 differential test (drewsonne/maya-project#9) plus a recorded
+#   decision. Until that decision exists, no record here may be promoted to
+#   derived or attested — promotion would smuggle the undecided policy past
+#   the gate (per this package's contract and red-team advisory, ADR 0020).
+# - No implementation was run to produce any value in this file, and no record
+#   cites observed app or library behaviour.
+# - Conventions: long_count holds the RAW out-of-range input (it is
+#   pattern-valid: digits and dots). The intended normalised form appears only
+#   in notes, per case, with the carry arithmetic shown. Where a rejection.yaml
+#   record pins the strict-mode rejection of the same input, the two records
+#   cross-reference each other: which behaviour applies where is exactly the
+#   open ADR 0005 question.
+
+- id: len-kin-overflow
+  long_count: "9.16.4.10.25"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.16.4.10.25" (k'in = 25, above the k'in
+    range [0,19]).
+    Intended normalisation: "9.16.4.11.5".
+    Arithmetic (claim 1, hand-derived, no implementation run): k'in carries at
+    20, so 25 = 1 x 20 + 5 -> k'in 5, carry 1 winal; winal 10 + 1 = 11, which
+    is within the winal range [0,17]; higher positions unchanged.
+    Acceptance policy (claim 2, UNDECIDED): whether out-of-range k'in input is
+    accepted and normalised at all has no published source and no recorded
+    project decision; ADR 0005 marks it an open question for the wave-4
+    differential test (drewsonne/maya-project#9). This record stays
+    provenance: unverified and gated out until a decision is recorded.
+
+- id: len-kin-multi-carry
+  long_count: "9.16.4.10.45"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.16.4.10.45" (k'in = 45, above the k'in
+    range [0,19] by more than one carry unit).
+    Intended normalisation: "9.16.4.12.5".
+    Arithmetic (claim 1, hand-derived, no implementation run): 45 = 2 x 20 + 5
+    -> k'in 5, carry 2 winals; winal 10 + 2 = 12, within [0,17]; higher
+    positions unchanged. Pins that normalisation is division with remainder,
+    not a single-step decrement.
+    Acceptance policy (claim 2, UNDECIDED): same open question as
+    len-kin-overflow (ADR 0005; drewsonne/maya-project#9). This record stays
+    provenance: unverified and gated out until a decision is recorded.
+
+- id: len-winal-overflow
+  long_count: "9.16.4.18.8"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.16.4.18.8" (winal = 18, above the winal
+    range [0,17]).
+    Intended normalisation: "9.16.5.0.8".
+    Arithmetic (claim 1, hand-derived, no implementation run): the winal
+    position carries at 18 (18 winal = 1 tun = 360 days), so 18 = 1 x 18 + 0
+    -> winal 0, carry 1 tun; tun 4 + 1 = 5, within [0,19]; k'in and higher
+    positions unchanged.
+    Acceptance policy (claim 2, UNDECIDED): strict-mode counterpart:
+    rejection.yaml rej-lc-winal-18 pins rejection of this same input. Whether
+    lenient acceptance, strict rejection, or both (in different layers) is
+    intended is the open ADR 0005 question, to be settled by the wave-4
+    differential test (drewsonne/maya-project#9) plus a recorded decision.
+    This record stays provenance: unverified and gated out until then.
+
+- id: len-tun-overflow
+  long_count: "9.16.20.10.8"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.16.20.10.8" (tun = 20, above the tun
+    range [0,19]).
+    Intended normalisation: "9.17.0.10.8".
+    Arithmetic (claim 1, hand-derived, no implementation run): the tun position
+    carries at 20, so 20 = 1 x 20 + 0 -> tun 0, carry 1 k'atun; k'atun
+    16 + 1 = 17, within [0,19]; other positions unchanged.
+    Acceptance policy (claim 2, UNDECIDED): strict-mode counterpart:
+    rejection.yaml rej-lc-tun-20. Same open question (ADR 0005;
+    drewsonne/maya-project#9). This record stays provenance: unverified and
+    gated out until a decision is recorded.
+
+- id: len-katun-overflow
+  long_count: "9.20.4.10.8"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.20.4.10.8" (k'atun = 20, above the
+    k'atun range [0,19]).
+    Intended normalisation: "10.0.4.10.8".
+    Arithmetic (claim 1, hand-derived, no implementation run): the k'atun
+    position carries at 20, so 20 = 1 x 20 + 0 -> k'atun 0, carry 1 bak'tun;
+    bak'tun 9 + 1 = 10; lower positions unchanged.
+    Acceptance policy (claim 2, UNDECIDED): same open question (ADR 0005;
+    drewsonne/maya-project#9). This record stays provenance: unverified and
+    gated out until a decision is recorded.
+
+- id: len-cascade-carry
+  long_count: "9.19.19.17.20"
+  provenance: unverified
+  checked: "2026-09-21"
+  notes: |
+    Raw input (verbatim): long_count "9.19.19.17.20" (only the k'in is out of
+    range, but the carry must ripple through every position).
+    Intended normalisation: "10.0.0.0.0".
+    Arithmetic (claim 1, hand-derived, no implementation run), carry chain:
+    k'in 20 = 1 x 20 + 0 -> k'in 0, carry 1 winal;
+    winal 17 + 1 = 18 = 1 x 18 + 0 -> winal 0, carry 1 tun;
+    tun 19 + 1 = 20 = 1 x 20 + 0 -> tun 0, carry 1 k'atun;
+    k'atun 19 + 1 = 20 = 1 x 20 + 0 -> k'atun 0, carry 1 bak'tun;
+    bak'tun 9 + 1 = 10 -> "10.0.0.0.0".
+    Cross-check: 9.19.19.17.19 is the day before 10.0.0.0.0, and the input adds
+    one k'in to it. Pins that a single out-of-range position may cascade.
+    Acceptance policy (claim 2, UNDECIDED): same open question (ADR 0005;
+    drewsonne/maya-project#9). This record stays provenance: unverified and
+    gated out until a decision is recorded.
