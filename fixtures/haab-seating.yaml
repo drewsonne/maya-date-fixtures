@@ -1,0 +1,172 @@
+# Haab seating convention, pinned per source.
+# Package: wave-2-cycles-and-seating.
+#
+# Three independent sources were consulted (each opened and read for this
+# file); every record's notes state which source it comes from, which seating
+# convention that source follows, and the page where that convention is
+# stated or exemplified:
+#   - Kettunen, Harri, and Christophe Helmke. 2019. Introduction to Maya
+#     Hieroglyphs. Sixteenth revised edition. Wayeb.
+#     Convention: the first day of a month is its "seating"; month-day
+#     coefficients written numerically 0-19 (stated p. 49, exemplified
+#     pp. 51-52).
+#   - Stuart, David. 2004. "New Year Records in Classic Maya Inscriptions."
+#     The PARI Journal 5(2):1-6.
+#     Convention: the seating written glyphically as "Seating of <month>",
+#     the station immediately before "1 <month>" (exemplified pp. 1, 5, 6).
+#   - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286
+#     Correlation." The PARI Journal 13(2):3-16.
+#     Convention: numeric 0-based seating ("0 Pop" precedes "1 Pop",
+#     Figures 13-14, p. 13); the Colonial-era count recorded by Landa runs
+#     one day lower (12 K'an 1 Pop where the Classic count has 12 K'an
+#     2 Pop, pp. 4, 10-13).
+#
+# All three sources agree on the seating convention itself: the seated day
+# is the first day of the month and immediately precedes "1 <month>". The
+# genuine divergences documented BY these sources (Classic vs Colonial/
+# Puuc-style counting; Thompson's 1-Pop year bearers vs Stuart's
+# seating-of-Pop year bearers) are recorded in the notes below and reported
+# as findings in the pull request — per contract they are not averaged or
+# resolved here.
+
+- id: seat-kh-0-sotz
+  long_count: "9.8.19.17.17"
+  calendar_round: "13 Kaban 0 Sotz'"
+  lord_of_night: G6
+  maya_day_number: 1360797
+  provenance: attested
+  source: "Kettunen & Helmke 2019, Introduction to Maya Hieroglyphs, 16th ed., p. 52 (correlation example table)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Kettunen & Helmke 2019. Seating convention of this source:
+    "The beginning of the month was called the 'seating' of the month,
+    and after 19 days Pop is completed and the next month (Wo) is
+    'seated'" (p. 49); coefficients written numerically 0-19, with the
+    seated day as 0 — exemplified on p. 52, where the table runs
+    9.8.19.17.16 "12 Kib 19 Sip" directly into 9.8.19.17.17 "13 Kaban
+    0 Sotz'" (this record), and on p. 51, where 0 appears among the
+    possible haab coefficients (Kaban takes 5/10/15/0). G6 as given in
+    the same p. 52 table row. MDN hand-checked: 9x144000 + 8x7200 +
+    19x360 + 17x20 + 17 = 1360797.
+
+- id: seat-kh-0-sek
+  long_count: "9.9.0.0.17"
+  calendar_round: "7 Kaban 0 Sek"
+  lord_of_night: G8
+  maya_day_number: 1360817
+  provenance: attested
+  source: "Kettunen & Helmke 2019, Introduction to Maya Hieroglyphs, 16th ed., p. 52 (correlation example table)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Kettunen & Helmke 2019. Same seating convention as
+    seat-kh-0-sotz (stated p. 49: seated day begins the month; numeric
+    0-19 coefficients): the p. 52 table runs 9.9.0.0.16 "6 Kib 19 Sotz'"
+    directly into 9.9.0.0.17 "7 Kaban 0 Sek" (this record), with G8.
+    Second in-source exemplification, showing the convention holds
+    across month boundaries generally, not only at Sotz'.
+
+- id: seat-stuart-naranjo-st18
+  long_count: "9.14.14.7.2"
+  calendar_round: "1 Ik' 0 Pop"
+  maya_day_number: 1401982
+  provenance: attested
+  source: "Stuart 2004, 'New Year Records in Classic Maya Inscriptions', The PARI Journal 5(2), pp. 1-2 (Naranjo Stela 18)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Stuart 2004. Seating convention of this source: the seating
+    is written glyphically as "Seating of Pop" — Naranjo Stela 18 records
+    "1 Ik' Seating of Pop", corresponding to Long Count 9.14.14.7.2
+    (p. 1); Stuart calls it "the 'seating' of the initial month" and
+    treats it as the New Year station (p. 2). Numeric rendering "0 Pop"
+    here follows the 0-19 convention of Kettunen & Helmke 2019:49, to
+    which Stuart's "Seating of Pop" is equivalent (the day before 1 Pop).
+    Divergence documented by this source, reported not resolved: Stuart
+    argues the Classic year bearers fell on the seating of Pop (pp. 3-4),
+    while Thompson held they fell on 1 Pop, the first numbered day
+    (Thompson 1950:124-127, as quoted by Stuart 2004:3; Thompson 1950
+    was not independently consulted for this file). MDN hand-checked:
+    9x144000 + 14x7200 + 14x360 + 7x20 + 2 = 1401982; residue checks:
+    1401982 mod 13 = 10, 4 + 10 = 14 -> 1 (coefficient 1); 1401982 mod
+    20 = 2, Ajaw + 2 = Ik'; year-day (348 + 1401982) mod 365 = 0 = 0 Pop.
+
+- id: seat-stuart-copan-altar-u
+  long_count: "9.18.2.5.17"
+  calendar_round: "3 Kaban 0 Pop"
+  maya_day_number: 1426437
+  provenance: attested
+  source: "Stuart 2004, 'New Year Records in Classic Maya Inscriptions', The PARI Journal 5(2), p. 5 (Copan Altar U)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Stuart 2004. Copan Altar U "bears an inscription opening
+    with the Calendar Round 3 Kaban Seating of Pop, corresponding to
+    9.18.2.5.17" (p. 5); the same page cites the related record
+    9.17.9.2.12 "3 Eb Seating of Pop" as a seating in office on a New
+    Year. Seating convention of this source: glyphic "Seating of Pop",
+    the station before 1 Pop (see seat-stuart-naranjo-st18); numeric
+    "0 Pop" rendering per Kettunen & Helmke 2019:49. MDN hand-checked:
+    9x144000 + 18x7200 + 2x360 + 5x20 + 17 = 1426437; year-day
+    (348 + 1426437) mod 365 = 0 = 0 Pop.
+
+- id: seat-stuart-tikal-t4-lintel2
+  long_count: "9.15.12.11.12"
+  calendar_round: "6 Eb 0 Pop"
+  maya_day_number: 1408552
+  provenance: attested
+  source: "Stuart 2004, 'New Year Records in Classic Maya Inscriptions', The PARI Journal 5(2), p. 6 (Tikal Temple IV, Lintel 2)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Stuart 2004. Tikal Temple IV Lintel 2 mentions "the date
+    9.15.12.11.12 6 Eb Seating of Pop" (p. 6). Seating convention of
+    this source: glyphic "Seating of Pop" preceding 1 Pop (pp. 1, 5, 6);
+    numeric "0 Pop" rendering per Kettunen & Helmke 2019:49. MDN
+    hand-checked: 9x144000 + 15x7200 + 12x360 + 11x20 + 12 = 1408552;
+    year-day (348 + 1408552) mod 365 = 0 = 0 Pop.
+
+- id: seat-stuart-txix-house-e-sak
+  long_count: "2.0.0.10.2"
+  calendar_round: "9 Ik' 0 Sak"
+  lord_of_night: G4
+  maya_day_number: 288202
+  provenance: attested
+  source: "Stuart 2005, The Inscriptions from Temple XIX at Palenque, PARI, p. 84 (Temple XVIII jambs; Palace House E painted text)"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Stuart, David. 2005. The Inscriptions from Temple XIX at
+    Palenque: A Commentary (opened and read for this file). Stuart 2005:84
+    records "2.0.0.10.2 9 Ik' Seating of Sak" as "well anchored", cited
+    on the Temple XVIII jambs and in the House E painted text (which
+    also provides Glyph G4, "correct for a 2.0.0.10.2 placement").
+    Seating convention of this source: glyphic "Seating of <month>"
+    notation for months generally (Sak and Yax on the same page), the
+    station before "1 <month>"; numeric "0 Sak" rendering per Kettunen &
+    Helmke 2019:49. Shows the seating convention applies to any month,
+    not just the New Year seating of Pop. MDN hand-checked: 2x144000 +
+    10x20 + 2 = 288202; year-day (348 + 288202) mod 365 = 200 = 0 Sak
+    (Sak is the 11th month, days 200-219; month order per Kettunen &
+    Helmke 2019:58-59).
+
+- id: seat-ms-classic-vs-landa
+  long_count: "11.16.13.16.4"
+  calendar_round: "12 K'an 2 Pop"
+  maya_day_number: 1704204
+  provenance: attested
+  source: "Martin & Skidmore 2012, The PARI Journal 13(2), pp. 4, 13"
+  checked: "2026-09-21"
+  notes: >-
+    Source: Martin & Skidmore 2012. Seating convention of this source:
+    numeric 0-based — their Figures 13-14 (p. 13) run "11 Ak'bal 0 Pop"
+    into "12 K'an 1 Pop"/"12 K'an 2 Pop", exemplifying 0 Pop as the
+    seated day before 1 Pop. This record is the Classic-convention
+    Calendar Round 12 K'an 2 Pop for 11.16.13.16.4, MDN 1,704,204
+    (p. 4). Divergence documented by this source, reported not resolved:
+    Landa's Relacion records the same day as "12 K'an 1 Pop" — New
+    Year's Day in the Colonial Maya calendar — a Calendar Round "deemed
+    'impossible'" in the Classic system, where K'an pairs with 2 Pop
+    (pp. 4, 10-12); Classic "Puuc-style" dates likewise carry month
+    coefficients one lower than expected, which Stuart interprets as
+    records of nighttime events later fossilized into the Colonial norm
+    (Martin & Skidmore 2012:5, citing Stuart). This is a divergence
+    between the Classic and Colonial counting systems as documented
+    within the sources consulted, not a disagreement between those
+    sources; both conventions are recorded here side by side, never
+    averaged.

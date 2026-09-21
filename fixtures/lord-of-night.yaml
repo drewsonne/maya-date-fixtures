@@ -1,0 +1,117 @@
+# Lords of the Night (Glyph G, cycle of nine), including the G9-to-G1 wrap.
+# Package: wave-2-cycles-and-seating.
+#
+# Sources actually consulted (opened and read for this file):
+#   - Kettunen, Harri, and Christophe Helmke. 2019. Introduction to Maya
+#     Hieroglyphs. Sixteenth revised edition. Wayeb. Glyph G described as
+#     "a cycle of 9 days" of the Supplementary Series (p. 50); the nine
+#     Lords G1-G9 in Table VIII (p. 51); a day-by-day correlation of the
+#     Long Count, tzolk'in, haab and Lords of the Night (p. 52).
+#   - Stuart, David. 2005. The Inscriptions from Temple XIX at Palenque:
+#     A Commentary. PARI. (Published inscription readings of Glyph G at
+#     Palenque, pp. 62, 84.)
+#   - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286
+#     Correlation." The PARI Journal 13(2):3-16. (Long Count / Calendar
+#     Round / Maya Day Number anchors; no Glyph G content.)
+#
+# G-assignment rule used for the derived records below, induced from the
+# attested day-by-day table of Kettunen & Helmke 2019:52: G advances by one
+# each day and wraps G9 -> G1; taking r = maya_day_number mod 9, the Lord is
+# G9 when r = 0 and Gr otherwise (e.g. 9.9.0.0.0, MDN 1360800, 1360800 mod 9
+# = 0, tabulated there as G9; 9.9.0.0.1, MDN 1360801, mod 9 = 1, tabulated
+# as G1). The rule is independently confirmed by inscription: Stuart 2005:84
+# notes House E "provides a Glyph G4 ... correct for a 2.0.0.10.2 placement"
+# and MDN(2.0.0.10.2) = 288202, 288202 mod 9 = 4.
+
+# --- Attested from a published inscription reading ---------------------------
+
+- id: lon-attested-palenque-house-e
+  long_count: "2.0.0.10.2"
+  calendar_round: "9 Ik' 0 Sak"
+  lord_of_night: G4
+  maya_day_number: 288202
+  provenance: attested
+  source: "Stuart 2005, The Inscriptions from Temple XIX at Palenque, PARI, p. 84 (Palenque Palace House E painted text)"
+  checked: "2026-09-21"
+  notes: >-
+    Published inscription reading, not rule-generated: the painted text
+    under the vault spring of House E of the Palenque Palace cites
+    2.0.0.10.2 "9 Ik' Seating of Sak" (accession of the Triad
+    Progenitor) and "provides a Glyph G4 with its reference, which is
+    correct for a 2.0.0.10.2 placement" (Stuart 2005:84, where the date
+    is anchored by three independent citations). Stuart 2005:62 likewise
+    reads Glyph G1 in the Temple XIX platform Initial Series. Rule
+    cross-check: MDN = 2x144000 + 10x20 + 2 = 288202; 288202 mod 9 = 4
+    -> G4, matching the inscription. Calendar Round rendered numerically
+    (0 Sak = Seating of Sak) per Kettunen & Helmke 2019:49.
+
+# --- The G9-to-G1 wrap (pair: shared id prefix gwrap-, MDNs differ by 1) -----
+
+- id: gwrap-g9
+  long_count: "9.9.0.0.0"
+  calendar_round: "3 Ajaw 3 Sotz'"
+  lord_of_night: G9
+  maya_day_number: 1360800
+  provenance: attested
+  source: "Kettunen & Helmke 2019, Introduction to Maya Hieroglyphs, 16th ed., p. 52 (correlation example table)"
+  checked: "2026-09-21"
+  notes: >-
+    Last day of a nine-day Lords of the Night cycle. The p. 52 table of
+    Kettunen & Helmke 2019 gives 9.9.0.0.0 "3 Ajaw 3 Sotz'" G9 (Glyph G
+    described as "a cycle of 9 days", p. 50; the nine Lords G1-G9,
+    Table VIII, p. 51). MDN hand-checked: 9x144000 + 9x7200 = 1360800;
+    residue 1360800 mod 9 = 0, the G9 slot of the rule stated in this
+    file's header.
+
+- id: gwrap-g1
+  long_count: "9.9.0.0.1"
+  calendar_round: "4 Imix 4 Sotz'"
+  lord_of_night: G1
+  maya_day_number: 1360801
+  provenance: attested
+  source: "Kettunen & Helmke 2019, Introduction to Maya Hieroglyphs, 16th ed., p. 52 (correlation example table)"
+  checked: "2026-09-21"
+  notes: >-
+    G9-to-G1 wrap: the day immediately after gwrap-g9 (maya_day_numbers
+    1360800 and 1360801, differing by exactly 1). The p. 52 table of
+    Kettunen & Helmke 2019 gives 9.9.0.0.1 "4 Imix 4 Sotz'" G1 directly
+    after 9.9.0.0.0 G9 — the wrap is attested in the source table, not
+    generated from the mod-9 rule. Residue cross-check: 1360801 mod 9
+    = 1 -> G1. The same table wraps again at 9.9.0.0.9 "12 Muluk
+    12 Sotz'" G9 into 9.9.0.0.10 "13 Ok 13 Sotz'" G1.
+
+# --- Derived records (rule per header; full residue arithmetic shown) --------
+
+- id: lon-derived-era-base
+  long_count: "13.0.0.0.0"
+  calendar_round: "4 Ajaw 8 Kumk'u"
+  lord_of_night: G9
+  maya_day_number: 0
+  provenance: derived
+  source: "LC/CR/MDN attested in Martin & Skidmore 2012:4; G derived via the cycle of nine of Kettunen & Helmke 2019:50-52"
+  checked: "2026-09-21"
+  notes: >-
+    Long Count, Calendar Round and MDN 0 are attested (Martin &
+    Skidmore 2012:4 define the MDN as days since 13.0.0.0.0 4 Ajaw
+    8 Kumk'u). The Lord of the Night is derived, not attested here:
+    r = 0 mod 9 = 0, and by the rule induced from the attested table of
+    Kettunen & Helmke 2019:52 (r = 0 -> G9, as at MDN 1360800 =
+    9.9.0.0.0 G9, which is 151200 x 9 days after this base), the era
+    base falls on G9.
+
+- id: lon-derived-poco-uinic
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  lord_of_night: G6
+  maya_day_number: 1425516
+  provenance: derived
+  source: "LC/CR/MDN attested in Martin & Skidmore 2012:6-7 (Poco Uinic Stela 3); G derived via the cycle of nine of Kettunen & Helmke 2019:50-52"
+  checked: "2026-09-21"
+  notes: >-
+    Long Count, Calendar Round and MDN 1425516 are attested (Martin &
+    Skidmore 2012:6-7, Poco Uinic Stela 3 eclipse date). The Lord of
+    the Night is derived, not attested: 1425516 = 9 x 158390 + 6, so
+    r = 1425516 mod 9 = 6 -> G6 by the rule induced from the attested
+    table of Kettunen & Helmke 2019:52 and confirmed by the House E
+    inscription reading (Stuart 2005:84; see
+    lon-attested-palenque-house-e).
