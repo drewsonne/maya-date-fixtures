@@ -1,0 +1,1340 @@
+# Calendar Round ambiguity fixtures (package wave-2-cr-ambiguity).
+#
+# A Calendar Round (or a partial Calendar Round) does not name a unique Long Count;
+# it names a candidate set within any stated window. Each group below pins one such
+# set: one record per candidate, grouped by a shared id prefix, with the window
+# (explicit endpoints), the full set, the pairwise separations, and the completeness
+# arithmetic repeated verbatim in every record of the group so a reviewer can
+# recompute the set size from the window alone.
+#
+# Groups:
+#   cr-5kib-14chen-baktun9-*  full CR 5 Kib 14 Ch'en over the natural window bak'tun 9 (7 candidates)
+#   cr-5kib-14chen-katun917-* full CR 5 Kib 14 Ch'en over k'atun 9.17 (1 candidate)
+#   haab-14chen-katun917-*    partial (haab-only) '14 Ch'en over the same k'atun 9.17 (20 candidates)
+#
+# Anchor for all three groups: 9.17.19.13.16 5 Kib 14 Ch'en (MDN 1425516), Santa Elena
+# Poco Uinic Stela 3, attested in Martin & Skidmore 2012 (The PARI Journal 13(2),
+# pp. 6 and 9 - actually consulted) and independently verified by the residue
+# computations in the notes. All other members are hand-derived from the anchor by
+# exact multiples of the relevant recurrence (18980 days for a full CR, 365 days for
+# a haab-only partial); no value in this file was produced by running any calendar
+# implementation.
+
+- id: cr-5kib-14chen-baktun9-01
+  long_count: "9.2.3.7.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1311636
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 1 of 7. MDN = 1425516 - 6*18980 = 1311636. Window offset 1311636 - 1296000 =
+    15636 = 2*7200 + 3*360 + 7*20 + 16, giving Long Count 9.2.3.7.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 6*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-02
+  long_count: "9.4.16.2.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1330616
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 2 of 7. MDN = 1425516 - 5*18980 = 1330616. Window offset 1330616 - 1296000 =
+    34616 = 4*7200 + 16*360 + 2*20 + 16, giving Long Count 9.4.16.2.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 5*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-03
+  long_count: "9.7.8.15.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1349596
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 3 of 7. MDN = 1425516 - 4*18980 = 1349596. Window offset 1349596 - 1296000 =
+    53596 = 7*7200 + 8*360 + 15*20 + 16, giving Long Count 9.7.8.15.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 4*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-04
+  long_count: "9.10.1.10.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1368576
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 4 of 7. MDN = 1425516 - 3*18980 = 1368576. Window offset 1368576 - 1296000 =
+    72576 = 10*7200 + 1*360 + 10*20 + 16, giving Long Count 9.10.1.10.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 3*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-05
+  long_count: "9.12.14.5.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1387556
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 5 of 7. MDN = 1425516 - 2*18980 = 1387556. Window offset 1387556 - 1296000 =
+    91556 = 12*7200 + 14*360 + 5*20 + 16, giving Long Count 9.12.14.5.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 2*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-06
+  long_count: "9.15.7.0.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1406536
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 6 of 7. MDN = 1425516 - 1*18980 = 1406536. Window offset 1406536 - 1296000 =
+    110536 = 15*7200 + 7*360 + 0*20 + 16, giving Long Count 9.15.7.0.16. Its Calendar Round equals the
+    anchor's (5 Kib 14 Ch'en) because a step of 1*18980 days is a whole number of Calendar Rounds, and
+    18980 = lcm(260, 365) preserves both tzolk'in and haab. GROUP cr-5kib-14chen-baktun9 - one record
+    per candidate; this block is identical in every record of the group. Target: the full Calendar Round
+    5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-baktun9-07
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  provenance: attested
+  source: >-
+    Martin, Simon, and Joel Skidmore. 2012. Exploring the 584286 Correlation between the Maya and
+    European Calendars. The PARI Journal 13(2):3-16
+    (mesoweb.com/pari/publications/journal/1302/Correlation.pdf, consulted 2026-09-21) - p. 6: Calendar
+    Round 5 Kib 14 Ch'en with Long Count 9.17.19.13.16 on Santa Elena Poco Uinic Stela 3 (citing Teeple
+    1931:115); p. 9: MDN 1425516 for 9.17.19.13.16
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 7 of 7, the anchor itself; Long Count and Calendar Round attested (source above)
+    and verified by the residue computation below. GROUP cr-5kib-14chen-baktun9 - one record per
+    candidate; this block is identical in every record of the group. Target: the full Calendar Round 5
+    Kib 14 Ch'en. WINDOW (explicit endpoints): 9.0.0.0.0 (MDN 1296000, inclusive) to 10.0.0.0.0 (MDN
+    1440000, exclusive) - a natural window, the whole of bak'tun 9, length 144000 days. FULL CANDIDATE
+    SET (7 members): 9.2.3.7.16 (MDN 1311636); 9.4.16.2.16 (MDN 1330616); 9.7.8.15.16 (MDN 1349596);
+    9.10.1.10.16 (MDN 1368576); 9.12.14.5.16 (MDN 1387556); 9.15.7.0.16 (MDN 1406536); 9.17.19.13.16
+    (MDN 1425516). SEPARATIONS: consecutive members differ by exactly 18980 days (one Calendar Round);
+    members i and j (1-indexed) differ by (j - i) * 18980; relative to the first member the offsets are
+    0, 18980, 37960, 56940, 75920, 94900, 113880 days. COMPLETENESS (recomputable from the window
+    alone): anchor MDN 1425516 mod 18980 = 2016 (18980*75 = 1423500); window start 1296000 mod 18980 =
+    5360 (18980*68 = 1290640); first occurrence at window offset (2016 - 5360) + 18980 = 15636, i.e. MDN
+    1311636. Window length 144000 = 7*18980 + 11140; since the first offset 15636 >= the remainder
+    11140, the count is floor(144000/18980) = 7: 15636 + 6*18980 = 129516 < 144000 but 15636 + 7*18980 =
+    148496 >= 144000. So the set above is complete. Anchor verification for 9.17.19.13.16 (MDN 9*144000
+    + 17*7200 + 19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p.
+    9): tzolk'in number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so
+    (19 + 16) mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365
+    = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar
+    Round (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or
+    elementary calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin
+    & Skidmore 2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1
+    bak'tun = 144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day
+    Number example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names
+    indexed Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13
+    and name index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb;
+    months indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 +
+    MDN) mod 365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period
+    lcm(260, 365) = 18980 d.
+
+- id: cr-5kib-14chen-katun917-01
+  long_count: "9.17.19.13.16"
+  calendar_round: "5 Kib 14 Ch'en"
+  maya_day_number: 1425516
+  provenance: attested
+  source: >-
+    Martin, Simon, and Joel Skidmore. 2012. Exploring the 584286 Correlation between the Maya and
+    European Calendars. The PARI Journal 13(2):3-16
+    (mesoweb.com/pari/publications/journal/1302/Correlation.pdf, consulted 2026-09-21) - p. 6: Calendar
+    Round 5 Kib 14 Ch'en with Long Count 9.17.19.13.16 on Santa Elena Poco Uinic Stela 3 (citing Teeple
+    1931:115); p. 9: MDN 1425516 for 9.17.19.13.16
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: the single member of the set, the anchor itself; Long Count and Calendar Round attested
+    (source above) and verified by the residue computation below. GROUP cr-5kib-14chen-katun917 -
+    single-candidate full-CR set; paired with group haab-14chen-katun917 over the same window. Target:
+    the full Calendar Round 5 Kib 14 Ch'en. WINDOW (explicit endpoints): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (1 member): 9.17.19.13.16 (MDN 1425516). COMPLETENESS (recomputable from the window alone): window
+    length 7200 = 0*18980 + 7200 < 18980, so a full Calendar Round can occur at most once; 1418400 <=
+    1425516 < 1425600 puts the anchor inside the window, and its Calendar Round neighbours 1425516 -
+    18980 = 1406536 and 1425516 + 18980 = 1444496 both fall outside it, so the count is exactly 1.
+    COMPARISON (same window, stated side by side): full CR '5 Kib 14 Ch'en': 1 candidate; haab-only
+    partial '14 Ch'en' (recurrence interval 365 days): 20 candidates - see group haab-14chen-katun917.
+    Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 + 19*360 + 13*20 + 16 = 1425516,
+    matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in number: 1425516 = 13*109655 + 1,
+    so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16) mod 20 = 15 = Kib; together 5 Kib.
+    Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 - 365 = 174 = 8*20 + 14 = 14 Ch'en.
+    Result 5 Kib 14 Ch'en agrees with the attested Calendar Round (Martin & Skidmore 2012, p. 6).
+    Premises (each checked in a work actually opened, or elementary calendar structure): era base
+    0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore 2012, p. 3: 'the Maya base
+    date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun = 144000 d, 1 k'atun = 7200 d,
+    1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number example, Martin & Skidmore 2012,
+    p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed Imix=0 .. Ajaw=19, so 4 Ajaw at
+    the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name index (19 + MDN) mod 20; Kib =
+    index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months indexed Pop=0 .. Kumk'u=17, so 8
+    Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod 365; Ch'en = month index 8, so
+    position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260, 365) = 18980 d.
+
+- id: haab-14chen-katun917-01
+  long_count: "9.17.0.9.1"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1418581
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 1 of 20. MDN = 1425516 - 19*365 = 1418581. Window offset 1418581 - 1418400 = 181
+    = 0*360 + 9*20 + 1, giving Long Count 9.17.0.9.1 inside k'atun 9.17. Its haab position equals the
+    anchor's (174 = 14 Ch'en) because a step of 19*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-02
+  long_count: "9.17.1.9.6"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1418946
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 2 of 20. MDN = 1425516 - 18*365 = 1418946. Window offset 1418946 - 1418400 = 546
+    = 1*360 + 9*20 + 6, giving Long Count 9.17.1.9.6 inside k'atun 9.17. Its haab position equals the
+    anchor's (174 = 14 Ch'en) because a step of 18*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-03
+  long_count: "9.17.2.9.11"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1419311
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 3 of 20. MDN = 1425516 - 17*365 = 1419311. Window offset 1419311 - 1418400 = 911
+    = 2*360 + 9*20 + 11, giving Long Count 9.17.2.9.11 inside k'atun 9.17. Its haab position equals the
+    anchor's (174 = 14 Ch'en) because a step of 17*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-04
+  long_count: "9.17.3.9.16"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1419676
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 4 of 20. MDN = 1425516 - 16*365 = 1419676. Window offset 1419676 - 1418400 =
+    1276 = 3*360 + 9*20 + 16, giving Long Count 9.17.3.9.16 inside k'atun 9.17. Its haab position equals
+    the anchor's (174 = 14 Ch'en) because a step of 16*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-05
+  long_count: "9.17.4.10.1"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1420041
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 5 of 20. MDN = 1425516 - 15*365 = 1420041. Window offset 1420041 - 1418400 =
+    1641 = 4*360 + 10*20 + 1, giving Long Count 9.17.4.10.1 inside k'atun 9.17. Its haab position equals
+    the anchor's (174 = 14 Ch'en) because a step of 15*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-06
+  long_count: "9.17.5.10.6"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1420406
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 6 of 20. MDN = 1425516 - 14*365 = 1420406. Window offset 1420406 - 1418400 =
+    2006 = 5*360 + 10*20 + 6, giving Long Count 9.17.5.10.6 inside k'atun 9.17. Its haab position equals
+    the anchor's (174 = 14 Ch'en) because a step of 14*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-07
+  long_count: "9.17.6.10.11"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1420771
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 7 of 20. MDN = 1425516 - 13*365 = 1420771. Window offset 1420771 - 1418400 =
+    2371 = 6*360 + 10*20 + 11, giving Long Count 9.17.6.10.11 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 13*365 days is a whole number of haab
+    periods; its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than
+    the full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one
+    record per candidate; this block is identical in every record of the group. Target: the PARTIAL
+    Calendar Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a
+    haab-only input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days).
+    WINDOW (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-08
+  long_count: "9.17.7.10.16"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1421136
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 8 of 20. MDN = 1425516 - 12*365 = 1421136. Window offset 1421136 - 1418400 =
+    2736 = 7*360 + 10*20 + 16, giving Long Count 9.17.7.10.16 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 12*365 days is a whole number of haab
+    periods; its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than
+    the full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one
+    record per candidate; this block is identical in every record of the group. Target: the PARTIAL
+    Calendar Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a
+    haab-only input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days).
+    WINDOW (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-09
+  long_count: "9.17.8.11.1"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1421501
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 9 of 20. MDN = 1425516 - 11*365 = 1421501. Window offset 1421501 - 1418400 =
+    3101 = 8*360 + 11*20 + 1, giving Long Count 9.17.8.11.1 inside k'atun 9.17. Its haab position equals
+    the anchor's (174 = 14 Ch'en) because a step of 11*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-10
+  long_count: "9.17.9.11.6"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1421866
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 10 of 20. MDN = 1425516 - 10*365 = 1421866. Window offset 1421866 - 1418400 =
+    3466 = 9*360 + 11*20 + 6, giving Long Count 9.17.9.11.6 inside k'atun 9.17. Its haab position equals
+    the anchor's (174 = 14 Ch'en) because a step of 10*365 days is a whole number of haab periods; its
+    tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the full-CR
+    set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record per
+    candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar Round
+    '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only input is
+    365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit
+    endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to
+    9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members):
+    9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN
+    1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771);
+    9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN
+    1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326);
+    9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6
+    (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive
+    members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365
+    days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905
+    = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window
+    offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset
+    181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 +
+    20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side by side):
+    haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-11
+  long_count: "9.17.10.11.11"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1422231
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 11 of 20. MDN = 1425516 - 9*365 = 1422231. Window offset 1422231 - 1418400 =
+    3831 = 10*360 + 11*20 + 11, giving Long Count 9.17.10.11.11 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 9*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-12
+  long_count: "9.17.11.11.16"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1422596
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 12 of 20. MDN = 1425516 - 8*365 = 1422596. Window offset 1422596 - 1418400 =
+    4196 = 11*360 + 11*20 + 16, giving Long Count 9.17.11.11.16 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 8*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-13
+  long_count: "9.17.12.12.1"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1422961
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 13 of 20. MDN = 1425516 - 7*365 = 1422961. Window offset 1422961 - 1418400 =
+    4561 = 12*360 + 12*20 + 1, giving Long Count 9.17.12.12.1 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 7*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-14
+  long_count: "9.17.13.12.6"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1423326
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 14 of 20. MDN = 1425516 - 6*365 = 1423326. Window offset 1423326 - 1418400 =
+    4926 = 13*360 + 12*20 + 6, giving Long Count 9.17.13.12.6 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 6*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-15
+  long_count: "9.17.14.12.11"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1423691
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 15 of 20. MDN = 1425516 - 5*365 = 1423691. Window offset 1423691 - 1418400 =
+    5291 = 14*360 + 12*20 + 11, giving Long Count 9.17.14.12.11 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 5*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-16
+  long_count: "9.17.15.12.16"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1424056
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 16 of 20. MDN = 1425516 - 4*365 = 1424056. Window offset 1424056 - 1418400 =
+    5656 = 15*360 + 12*20 + 16, giving Long Count 9.17.15.12.16 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 4*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-17
+  long_count: "9.17.16.13.1"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1424421
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 17 of 20. MDN = 1425516 - 3*365 = 1424421. Window offset 1424421 - 1418400 =
+    6021 = 16*360 + 13*20 + 1, giving Long Count 9.17.16.13.1 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 3*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-18
+  long_count: "9.17.17.13.6"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1424786
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 18 of 20. MDN = 1425516 - 2*365 = 1424786. Window offset 1424786 - 1418400 =
+    6386 = 17*360 + 13*20 + 6, giving Long Count 9.17.17.13.6 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 2*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-19
+  long_count: "9.17.18.13.11"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1425151
+  provenance: derived
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 19 of 20. MDN = 1425516 - 1*365 = 1425151. Window offset 1425151 - 1418400 =
+    6751 = 18*360 + 13*20 + 11, giving Long Count 9.17.18.13.11 inside k'atun 9.17. Its haab position
+    equals the anchor's (174 = 14 Ch'en) because a step of 1*365 days is a whole number of haab periods;
+    its tzolk'in differs from the anchor's, which is exactly why the partial set is larger than the
+    full-CR set. calendar_round here records only the haab half. GROUP haab-14chen-katun917 - one record
+    per candidate; this block is identical in every record of the group. Target: the PARTIAL Calendar
+    Round '14 Ch'en' (haab statement only, tzolk'in unknown). The recurrence interval for a haab-only
+    input is 365 days, the haab period (for a tzolk'in-only input it would be 260 days). WINDOW
+    (explicit endpoints, same window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400,
+    inclusive) to 9.18.0.0.0 (MDN 1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET
+    (20 members): 9.17.0.9.1 (MDN 1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311);
+    9.17.3.9.16 (MDN 1419676); 9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN
+    1420771); 9.17.7.10.16 (MDN 1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866);
+    9.17.10.11.11 (MDN 1422231); 9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6
+    (MDN 1423326); 9.17.14.12.11 (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421);
+    9.17.17.13.6 (MDN 1424786); 9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS:
+    consecutive members differ by exactly 365 days (one haab); members i and j (1-indexed) differ by (j
+    - i) * 365 days. COMPLETENESS (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191
+    (365*3905 = 1425325); window start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at
+    window offset 191 - 10 = 181, i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first
+    offset 181 < the remainder 265, the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200
+    but 181 + 20*365 = 7481 >= 7200. So the set above is complete. COMPARISON (same window, stated side
+    by side): haab-only partial '14 Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group
+    cr-5kib-14chen-katun917) - the partial input's candidate set is larger, 20 > 1, because the full CR
+    pins the day within an 18980-day cycle while the haab alone pins it only within a 365-day cycle.
+    Every member keeps haab position 174 = 14 Ch'en because each step is a whole number of haab periods
+    (365 days). The last member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is
+    attested and residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 +
+    19*360 + 13*20 + 16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in
+    number: 1425516 = 13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16)
+    mod 20 = 15 = Kib; together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 -
+    365 = 174 = 8*20 + 14 = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round
+    (Martin & Skidmore 2012, p. 6). Premises (each checked in a work actually opened, or elementary
+    calendar structure): era base 0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore
+    2012, p. 3: 'the Maya base date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun =
+    144000 d, 1 k'atun = 7200 d, 1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number
+    example, Martin & Skidmore 2012, p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed
+    Imix=0 .. Ajaw=19, so 4 Ajaw at the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name
+    index (19 + MDN) mod 20; Kib = index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months
+    indexed Pop=0 .. Kumk'u=17, so 8 Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod
+    365; Ch'en = month index 8, so position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260,
+    365) = 18980 d.
+
+- id: haab-14chen-katun917-20
+  long_count: "9.17.19.13.16"
+  calendar_round: "14 Ch'en"
+  maya_day_number: 1425516
+  provenance: attested
+  source: >-
+    Martin, Simon, and Joel Skidmore. 2012. Exploring the 584286 Correlation between the Maya and
+    European Calendars. The PARI Journal 13(2):3-16
+    (mesoweb.com/pari/publications/journal/1302/Correlation.pdf, consulted 2026-09-21) - p. 6: Calendar
+    Round 5 Kib 14 Ch'en with Long Count 9.17.19.13.16 on Santa Elena Poco Uinic Stela 3 (citing Teeple
+    1931:115); p. 9: MDN 1425516 for 9.17.19.13.16
+  checked: "2026-09-21"
+  notes: >-
+    THIS RECORD: member 20 of 20, the anchor itself; its full Calendar Round 5 Kib 14 Ch'en (of which
+    the group's partial target '14 Ch'en' is the haab half) is attested (source above) and verified by
+    the residue computation below. GROUP haab-14chen-katun917 - one record per candidate; this block is
+    identical in every record of the group. Target: the PARTIAL Calendar Round '14 Ch'en' (haab
+    statement only, tzolk'in unknown). The recurrence interval for a haab-only input is 365 days, the
+    haab period (for a tzolk'in-only input it would be 260 days). WINDOW (explicit endpoints, same
+    window as group cr-5kib-14chen-katun917): 9.17.0.0.0 (MDN 1418400, inclusive) to 9.18.0.0.0 (MDN
+    1425600, exclusive) - one k'atun, length 7200 days. FULL CANDIDATE SET (20 members): 9.17.0.9.1 (MDN
+    1418581); 9.17.1.9.6 (MDN 1418946); 9.17.2.9.11 (MDN 1419311); 9.17.3.9.16 (MDN 1419676);
+    9.17.4.10.1 (MDN 1420041); 9.17.5.10.6 (MDN 1420406); 9.17.6.10.11 (MDN 1420771); 9.17.7.10.16 (MDN
+    1421136); 9.17.8.11.1 (MDN 1421501); 9.17.9.11.6 (MDN 1421866); 9.17.10.11.11 (MDN 1422231);
+    9.17.11.11.16 (MDN 1422596); 9.17.12.12.1 (MDN 1422961); 9.17.13.12.6 (MDN 1423326); 9.17.14.12.11
+    (MDN 1423691); 9.17.15.12.16 (MDN 1424056); 9.17.16.13.1 (MDN 1424421); 9.17.17.13.6 (MDN 1424786);
+    9.17.18.13.11 (MDN 1425151); 9.17.19.13.16 (MDN 1425516). SEPARATIONS: consecutive members differ by
+    exactly 365 days (one haab); members i and j (1-indexed) differ by (j - i) * 365 days. COMPLETENESS
+    (recomputable from the window alone): anchor MDN 1425516 mod 365 = 191 (365*3905 = 1425325); window
+    start 1418400 mod 365 = 10 (365*3886 = 1418390); first occurrence at window offset 191 - 10 = 181,
+    i.e. MDN 1418581. Window length 7200 = 19*365 + 265; since the first offset 181 < the remainder 265,
+    the count is floor(7200/365) + 1 = 20: 181 + 19*365 = 7116 < 7200 but 181 + 20*365 = 7481 >= 7200.
+    So the set above is complete. COMPARISON (same window, stated side by side): haab-only partial '14
+    Ch'en': 20 candidates; full CR '5 Kib 14 Ch'en': 1 candidate (group cr-5kib-14chen-katun917) - the
+    partial input's candidate set is larger, 20 > 1, because the full CR pins the day within an
+    18980-day cycle while the haab alone pins it only within a 365-day cycle. Every member keeps haab
+    position 174 = 14 Ch'en because each step is a whole number of haab periods (365 days). The last
+    member 9.17.19.13.16 is the anchor whose full Calendar Round 5 Kib 14 Ch'en is attested and
+    residue-verified. Anchor verification for 9.17.19.13.16 (MDN 9*144000 + 17*7200 + 19*360 + 13*20 +
+    16 = 1425516, matching the MDN printed in Martin & Skidmore 2012, p. 9): tzolk'in number: 1425516 =
+    13*109655 + 1, so (4 + 1) = 5; tzolk'in name: 1425516 mod 20 = 16, so (19 + 16) mod 20 = 15 = Kib;
+    together 5 Kib. Haab: 1425516 = 365*3905 + 191, so (348 + 191) mod 365 = 539 - 365 = 174 = 8*20 + 14
+    = 14 Ch'en. Result 5 Kib 14 Ch'en agrees with the attested Calendar Round (Martin & Skidmore 2012,
+    p. 6). Premises (each checked in a work actually opened, or elementary calendar structure): era base
+    0.0.0.0.0 (completion 13.0.0.0.0) = 4 Ajaw 8 Kumk'u (Martin & Skidmore 2012, p. 3: 'the Maya base
+    date of 13.0.0.0.0 4 Ajaw 8 Kumk'u'); positional day values 1 bak'tun = 144000 d, 1 k'atun = 7200 d,
+    1 tun = 360 d, 1 winal = 20 d, 1 k'in = 1 d (worked Maya Day Number example, Martin & Skidmore 2012,
+    p. 4); tzolk'in period 260 d (13 numbers x 20 names; names indexed Imix=0 .. Ajaw=19, so 4 Ajaw at
+    the era base gives number (4 + MDN) mod 13 mapped to 1..13 and name index (19 + MDN) mod 20; Kib =
+    index 15); haab period 365 d (18 months of 20 d + 5 d Wayeb; months indexed Pop=0 .. Kumk'u=17, so 8
+    Kumk'u = position 17*20+8 = 348 and haab position = (348 + MDN) mod 365; Ch'en = month index 8, so
+    position 174 = 8*20+14 = 14 Ch'en); Calendar Round period lcm(260, 365) = 18980 d.
