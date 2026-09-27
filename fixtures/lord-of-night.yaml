@@ -9,7 +9,7 @@
 #     Long Count, tzolk'in, haab and Lords of the Night (p. 52).
 #   - Stuart, David. 2005. The Inscriptions from Temple XIX at Palenque:
 #     A Commentary. PARI. (Published inscription readings of Glyph G at
-#     Palenque, pp. 62, 84.)
+#     Palenque, pp. 63, 84.)
 #   - Martin, Simon, and Joel Skidmore. 2012. "Exploring the 584286
 #     Correlation." The PARI Journal 13(2):3-16. (Long Count / Calendar
 #     Round / Maya Day Number anchors; no Glyph G content.)
@@ -39,7 +39,7 @@
     2.0.0.10.2 "9 Ik' Seating of Sak" (accession of the Triad
     Progenitor) and "provides a Glyph G4 with its reference, which is
     correct for a 2.0.0.10.2 placement" (Stuart 2005:84, where the date
-    is anchored by three independent citations). Stuart 2005:62 likewise
+    is anchored by three independent citations). Stuart 2005:63 likewise
     reads Glyph G1 in the Temple XIX platform Initial Series. Rule
     cross-check: MDN = 2x144000 + 10x20 + 2 = 288202; 288202 mod 9 = 4
     -> G4, matching the inscription. Calendar Round rendered numerically
