@@ -159,13 +159,13 @@
     3653 - 198 = 3455, so JDN 2009799 = 0790-07-17 proleptic Gregorian.
     Offset check: Gregorian = Julian + 4 at this date.
 
-# --- Triple 3: Landa's 1553 Maya New Year (12 K'an 1 Pop), Long Count
-# 11.16.13.16.4, MDN 1704204. Attested members: 584286 (Figure 16) and 584283
-# (Figure 11); the 584285 member is derived by JDN arithmetic. ---
+# --- Triple 3: Landa's 1553 Maya New Year (Landa's "12 K'an 1 Pop"; Calendar
+# Round not asserted, see notes), Long Count 11.16.13.16.4, MDN 1704204.
+# Attested members: 584286 (Figure 16) and 584283 (Figure 11); the 584285
+# member is derived by JDN arithmetic. ---
 
 - id: landa-1553-584286
   long_count: "11.16.13.16.4"
-  calendar_round: "12 K'an 1 Pop"
   maya_day_number: 1704204
   julian_day_number: 2288490
   gregorian_proleptic: "1553-07-28"
@@ -189,10 +189,15 @@
     53y = 1553-01-01 after 53x365 + 13 leap days (1504...1552) = 19358 days;
     19566 - 19358 = 208 days after 1553-01-01 = day-of-year 209 of common year
     1553 = 1553-07-28.
+    Calendar Round deliberately not asserted: M&S print both "12 K'an 1 Pop"
+    (Landa's Colonial-era reading) and "12 K'an 2 Pop" (Classic system) for
+    MDN 1704204 (Figs. 13, 14, 16), and Fig. 11's caption calls the equation
+    of the two "Thompson's (erroneous) assumption"; Classic arithmetic from
+    4 Ajaw 8 Kumk'u (0-seating) gives 12 K'an 2 Pop. Divergence recorded for
+    maya-record.
 
 - id: landa-1553-584285
   long_count: "11.16.13.16.4"
-  calendar_round: "12 K'an 1 Pop"
   maya_day_number: 1704204
   julian_day_number: 2288489
   gregorian_proleptic: "1553-07-27"
@@ -213,7 +218,6 @@
 
 - id: landa-1553-584283
   long_count: "11.16.13.16.4"
-  calendar_round: "12 K'an 1 Pop"
   maya_day_number: 1704204
   julian_day_number: 2288487
   gregorian_proleptic: "1553-07-25"
@@ -234,3 +238,9 @@
     independently: K&H 2018:53 anchor JDN 2268924 = 1500-01-01 Gregorian;
     2288487 - 2268924 = 19563; 19563 - 19358 (to 1553-01-01) = 205 days after
     1553-01-01 = day-of-year 206 of common year 1553 = 1553-07-25.
+    Calendar Round deliberately not asserted: M&S print both "12 K'an 1 Pop"
+    (Landa's Colonial-era reading) and "12 K'an 2 Pop" (Classic system) for
+    MDN 1704204 (Figs. 13, 14, 16), and Fig. 11's caption calls the equation
+    of the two "Thompson's (erroneous) assumption"; Classic arithmetic from
+    4 Ajaw 8 Kumk'u (0-seating) gives 12 K'an 2 Pop. Divergence recorded for
+    maya-record.
