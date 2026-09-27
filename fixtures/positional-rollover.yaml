@@ -43,15 +43,18 @@
   source: >-
     Martin and Skidmore 2012, "Exploring the 584286 Correlation between the
     Maya and European Calendars", The PARI Journal 13(2), p. 4 (worked
-    breakdown: 11 bak'tuns = 1,584,000 days; 16 k'atuns = 115,200 days;
-    13 tuns = 4,680 days; 16 winals = 320 days; 4 k'ins = 4 days;
+    breakdown: 11 bak'tuns = 1,584,000 days; 16 k'atuns = 115,000 days
+    [sic — printed typo; 16 × 7,200 = 115,200, and the column sums to the
+    printed total only with 115,200]; 13 tuns = 4,680 days; 16 winals = 320 days; 4 k'ins = 4 days;
     total 1,704,204 days since 13.0.0.0.0 4 Ajaw 8 Kumk'u).
   checked: "2026-09-21"
   notes: >-
     Attests the place values used by every derived record in this file:
-    bak'tun 144,000 (1,584,000/11), k'atun 7,200 (115,200/16), tun 360
-    (4,680/13), winal 20 (320/16), k'in 1 — i.e. the winal position is
-    base-18 (360/20 = 18) and all other positions are base-20.
+    bak'tun 144,000 (1,584,000/11), k'atun 7,200 (inferred: 1,704,204 −
+    1,584,000 − 4,680 − 320 − 4 = 115,200; 115,200/16 — the page misprints
+    this line as 115,000), tun 360 (4,680/13), winal 20 (320/16), k'in 1 —
+    i.e. the winal position is base-18 (360/20 = 18) and all other positions
+    are base-20.
 
 # --- Winal rollover: winal position carries at 18, not 20 ---------------------
 
@@ -177,8 +180,10 @@
   provenance: derived
   source: >-
     Convention: Stuart, David, 2012, "Bak'tuns and More Bak'tuns", Maya
-    Decipherment (blog), 19 December 2012 — future bak'tuns "represented as
-    14.0.0.0.0, 15.0.0.0.0, and so on. This will run forward still until
+    Decipherment (blog), 19 December 2012 (post body; the phrases 'the end of
+    1 piktun, or 1.0.0.0.0.0' and 'a panel in the Temple of the Inscriptions'
+    are from Stuart's own reply in the post's comment thread, December 2012)
+    — future bak'tuns "represented as 14.0.0.0.0, 15.0.0.0.0, and so on. This will run forward still until
     19.0.0.0.0", after which "the bak'tun changes to 0 and the next higher
     period, the piktun, turns over as 1", reaching "the end of 1 piktun, or
     1.0.0.0.0.0" ("1.0.0.0.0.0 October 13, 4772"), per the panel in the
