@@ -28,13 +28,22 @@
     Rejected input (verbatim): maya_day_number -1.
     Required error (intended name, proposed for review): ERR_NEGATIVE_MAYA_DAY_NUMBER.
     Violated rule and bound: maya_day_number >= 0.
-    Derivation of the bound: the Long Count "records linear time from a
-    (mythological) zero point ... onwards" (Kettunen & Helmke 2020, Appendix E,
-    p. 47). The maya day number counts whole days elapsed since the era base,
-    which is day 0; the smallest representable value is therefore 0, and
-    -1 < 0 violates the bound. ADR 0005 (maya-project docs/decisions/0005)
-    records rejection of negative Maya Day Numbers as the library's intended
-    strict behaviour. Boundary case: -1 is the value adjacent to the bound.
+    Bound source: input-domain policy, not a calendar fact. `maya-dates`
+    currently raises on negative Maya Day Numbers (ADR 0005, Consequences — a
+    description of existing behaviour in a proposed ADR, not a recorded
+    decision) and the wave-2 package criteria require negative Maya Day Numbers
+    to be rejected. Pre-era dates do occur in inscriptions (e.g. the Temple of
+    the Cross Initial Series 12.19.13.4.0 8 Ajaw 18 Sek, 2,440 days before the
+    era base — Lounsbury 1976, "A Rationale for the Initial Date of the Temple
+    of the Cross at Palenque", in Robertson (ed.), The Art, Iconography and
+    Dynastic History of Palenque, Part III, p. 211, which writes the date
+    "12.19.13.4.0, 8 Ahau 18 Zec" and gives its distance before 4 Ahau 8 Cumhu
+    13.0.0.0.0 as the would-be ring number 6.14.0 = 2440 days), so a
+    stricter-than-inscriptional domain is being chosen here; the decision is to
+    be recorded. Context only, not the source of the bound: the Long Count
+    "records linear time from a (mythological) zero point ... onwards"
+    (Kettunen & Helmke 2020, Appendix E, p. 47). Boundary case: -1 is the value
+    adjacent to the bound.
 
 - id: rej-mdn-negative-era-span
   maya_day_number: -1872000
@@ -45,7 +54,7 @@
     Rejected input (verbatim): maya_day_number -1872000.
     Required error (intended name, proposed for review): ERR_NEGATIVE_MAYA_DAY_NUMBER.
     Violated rule and bound: maya_day_number >= 0 (same bound as
-    rej-mdn-negative-one; see that record's derivation). This case pins a
+    rej-mdn-negative-one; see that record's bound source). This case pins a
     large-magnitude negative (13.0.0.0.0 = 13 x 144000 = 1872000 days, negated)
     so the rejection cannot be satisfied by a check that only catches -1 or
     small negatives.
@@ -218,7 +227,7 @@
 
 - id: rej-cr-haab-coeff-20
   calendar_round: "4 Ajaw 20 Kumk'u"
-  provenance: attested
+  provenance: derived
   source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49"
   checked: "2026-09-21"
   notes: |
@@ -233,11 +242,14 @@
     and after 19 days Pop is completed and the next month (Wo) is 'seated'"
     (Kettunen & Helmke 2020, p. 49) — i.e. in modern numeric notation a month's
     day coefficients run seating (0) through 19; day 20 of a month does not
-    exist, the next month is seated instead.
+    exist, the next month is seated instead. K&H attest the month length and
+    the seating day, not a numeric 0; the [0,19] numbering is the 0-seating
+    convention, applied here as this dataset's convention pending a recorded
+    decision.
 
 - id: rej-cr-wayeb-coeff-5
   calendar_round: "4 Ajaw 5 Wayeb"
-  provenance: attested
+  provenance: derived
   source: "Kettunen & Helmke 2020, Introduction to Maya Hieroglyphs, 17th revised edn (Wayeb), Appendix E, p. 49"
   checked: "2026-09-21"
   notes: |
@@ -250,4 +262,6 @@
     Bound source: the haab is "made up of 18 named 'months' of 20 days each,
     with 5 extra days added on at the end of the year" (Kettunen & Helmke 2020,
     p. 49) — the five Wayeb days are seating (0) through 4 in modern numeric
-    notation, so 5 is out of range.
+    notation, so 5 is out of range. K&H attest the month length and the seating
+    day, not a numeric 0; the [0,4] numbering is the 0-seating convention,
+    applied here as this dataset's convention pending a recorded decision.
